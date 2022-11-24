@@ -553,12 +553,12 @@ public class ApprovedUsers extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        mainform main = new mainform();
-        main.setVisible(true);
-        main.pack();
-        main.setLocationRelativeTo(null);
-        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
+//        mainform main = new mainform();
+//        main.setVisible(true);
+//        main.pack();
+//        main.setLocationRelativeTo(null);
+//        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jlogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogin1ActionPerformed
