@@ -424,8 +424,9 @@ public class cashierusers extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 610, 284));
 
-        jclear.setBackground(new java.awt.Color(255, 255, 204));
+        jclear.setBackground(new java.awt.Color(102, 102, 102));
         jclear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jclear.setForeground(new java.awt.Color(153, 255, 102));
         jclear.setText("Clear");
         jclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,8 +435,9 @@ public class cashierusers extends javax.swing.JFrame {
         });
         jPanel1.add(jclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 510, 83, 33));
 
-        jUpdate.setBackground(new java.awt.Color(255, 255, 204));
+        jUpdate.setBackground(new java.awt.Color(102, 102, 102));
         jUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jUpdate.setForeground(new java.awt.Color(153, 255, 102));
         jUpdate.setText("Update");
         jUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,8 +446,9 @@ public class cashierusers extends javax.swing.JFrame {
         });
         jPanel1.add(jUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, 35));
 
-        jDelete.setBackground(new java.awt.Color(255, 255, 204));
+        jDelete.setBackground(new java.awt.Color(102, 102, 102));
         jDelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jDelete.setForeground(new java.awt.Color(153, 255, 102));
         jDelete.setText("Delete");
         jDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
