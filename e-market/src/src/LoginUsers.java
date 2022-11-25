@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package src;
-
+import javax.swing.ImageIcon.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -390,119 +390,119 @@ public class LoginUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jloginActionPerformed
-        // TODO add your handling code here:
 
+        
         String uname = jname.getText();
         String pass = jpassword.getText();
 
         if (uname.trim().equals("Enter username") || uname.trim().equals("")
-            || pass.trim().equals("Enter username") || pass.trim().equals("")) {
-
+                || pass.trim().equals("Enter username") || pass.trim().equals("")) {
+            
             JOptionPane.showMessageDialog(null, "All Fields are Compulsory to fill!");
         } else {
-
+            
             try {
-                Connection con = myc.getConn();
-
-                String sql = "SELECT * FROM registered_user WHERE  username=? AND password=? ";
-
-                //                 String sql = "SELECT * FROM users as a join `user_applicant` as b on a.username=? AND a.password=? = b.username=? AND b.password=?";
+//                
+                Connection con = myc.getConn();    
+            
+                String sql = "SELECT * FROM `registered_user` WHERE  username=? AND password=?";
+//                 String sql = "SELECT * FROM users as a join `user_applicant` as b on a.username=? AND a.password=? = b.username=? AND b.password=?";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setString(1, uname);
                 pst.setString(2, pass);
 
                 ResultSet rs = pst.executeQuery();
-
-                if (rs.next()) {
-                    if(rs.getString(9).equals("Inactive")){
-
+                
+                  if (rs.next()) {
+                    if(rs.getString(10).equals("Inactive")){
                         JOptionPane.showMessageDialog(null, "Your account is not active");
                     }else{
-                        if (rs.getString(8).equals("Admin")) {
+                        if (rs.getString(9).equals("Admin")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to " + "Admin" + "  Management!!");
-
+                            
                             adminpage admin = new adminpage(jname.getText());
                             admin.show();
-                            dispose();
+                            dispose();         
+                     
+                            id=rs.getInt("user_id");
+                            
+                                                try {
+                               Statement st = con.createStatement();
+                               String query1 = "select * from `registered_user`";
+                               ResultSet rs2 = st.executeQuery(query1);
 
-                            id=rs.getInt("id");
+                               while(rs2.next()){
+                                   //data wil added until finished..
+                                  String Id1 = rs2.getString("id");
+                                       String username1 = rs2.getString("username");
+                                       String password1 = rs2.getString("password");
+                                       String email_id1 = rs2.getString("email");
+                                       String phone = rs2.getString("phone_number");
+                                       String dat = rs2.getString("date");
+                                       String gender1 = rs2.getString("gender");
+                                       String age1 = rs2.getString("age");
+                                       String rolr = rs2.getString("role");
 
-                            try {
-                                Statement st = con.createStatement();
-                                String query1 = "select * from `registered_user`";
-                                ResultSet rs2 = st.executeQuery(query1);
+                                       String status1= rs2.getString("status");
 
-                                while(rs2.next()){
-                                    //data wil added until finished..
-                                    String Id1 = rs2.getString("id");
-                                    String username1 = rs2.getString("username");
-                                    String password1 = rs2.getString("password");
-                                    String email_id1 = rs2.getString("email");
-                                    String phone = rs2.getString("phone_number");
-                                    String gender1 = rs2.getString("gender");
-                                    String age1 = rs2.getString("age");
-                                    String rolr = rs2.getString("role");
+                                       //string array for store data into jtable..
+                                       String tbData[] = {Id1,username1,password1,email_id1,phone,dat,gender1,age1,rolr,status1};
+                                       DefaultTableModel tblModel = (DefaultTableModel)jTable20.getModel();
 
-                                    String status1= rs2.getString("status");
+                                   //add string array data into jtable..
 
-                                    //string array for store data into jtable..
-                                    String tbData[] = {Id1,username1,password1,email_id1,phone,gender1,age1,rolr,status1};
-                                    DefaultTableModel tblModel = (DefaultTableModel)jTable20.getModel();
+                                   tblModel.addRow(tbData);
 
-                                    //add string array data into jtable..
+                               }
 
-                                    tblModel.addRow(tbData);
-
-                                }
-
-                                //            con.close();
-                            } catch (SQLException ex) {
-                                Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-
-                        } else if (rs.getString(8).equals("Cashier")) {
+                   //            con.close();
+                           } catch (SQLException ex) {
+                               Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
+                           }
+                            
+                        } else if (rs.getString(9).equals("Cashier")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Cashier" + "  Management!!");
-
+                            
                             cashierpage cash = new cashierpage(jname.getText());
                             cash.show();
-                            dispose();
-
-                            id=rs.getInt("id");
-                        } else if (rs.getString(8).equals("Inventory Person")) {
+                            dispose();         
+                     
+                             id=rs.getInt("user_id");
+                        } else if (rs.getString(9).equals("Staff")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Inventory" + "  Management!!");
-
+                            
                             inventorypage inventory = new inventorypage(jname.getText());
-                            inventory.show();
-                            dispose();
-
-                            id=rs.getInt("id");
-
-                        }
-
+                             inventory.show();
+                            dispose();                 
+                     
+                             id=rs.getInt("user_id");
+                            
+                        }                                                
                     }
-                } else {
+                   } else {
                     JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
-
+                    
                     jclearActionPerformed(evt);
-
+                    
                 }
-
-                String sql1 = "SELECT * FROM `user_applicant` WHERE username=? AND password=?";
-
-                PreparedStatement pst1 = con.prepareStatement(sql1);
-                pst1.setString(1, uname);
-                pst1.setString(2, pass);
-                ResultSet rs1 = pst1.executeQuery();
-
-                if (rs1.next()) {
-                    if(rs1.getString(9).equals("Inactive")){
+                   
+                   String sql1 = "SELECT * FROM user_applicant WHERE  username=? AND password=?";
+//                 String sql = "SELECT * FROM users as a join `user_applicant` as b on a.username=? AND a.password=? = b.username=? AND b.password=?";
+                   PreparedStatement pst1 = con.prepareStatement(sql1);
+                   pst1.setString(1, uname);
+                  pst1.setString(2, pass);
+                   ResultSet rs1 = pst1.executeQuery();
+//                
+                  if (rs1.next()) {
+                    if(rs1.getString(10).equals("Inactive")){
                         JOptionPane.showMessageDialog(null, "Please wait for admin's approval");
                     }
-                }
+                  }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Database Exception Error!! " + e);
-            }
-
+                JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
+            } 
+            
+             
         }
 
     }//GEN-LAST:event_jloginActionPerformed

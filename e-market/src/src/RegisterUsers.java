@@ -2,6 +2,7 @@
 package src;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.ModuleLayer.empty;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -246,7 +247,7 @@ public class RegisterUsers extends javax.swing.JFrame {
         jLabel10.setText("Role");
 
         jrole.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", " " }));
+        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", "Supplier", "Buyer", " ", " " }));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 102));
 
@@ -427,6 +428,7 @@ public class RegisterUsers extends javax.swing.JFrame {
         String email_id=jemailid1.getText();
         String gender= jgender.getText();
         String age= jage.getText();
+//         int x =Integer.parseInt("9");
 //        int age = Integer.parseInt(jage.getText());
         String role;
         String phone=jphone.getText();
