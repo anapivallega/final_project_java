@@ -461,7 +461,7 @@ public class LoginUsers extends javax.swing.JFrame {
                            }
                             
                         } else if (rs.getString(9).equals("Cashier")) {
-                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Cashier" + "  Management!!");
+                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + " FaToTab Cashier" + "  Management!!");
                             
                             cashierpage cash = new cashierpage(jname.getText());
                             cash.show();
@@ -469,7 +469,7 @@ public class LoginUsers extends javax.swing.JFrame {
                      
                              id=rs.getInt("user_id");
                         } else if (rs.getString(9).equals("Staff")) {
-                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Inventory" + "  Management!!");
+                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + " FaToTab Inventory" + "  Management!!");
                             
                             inventorypage inventory = new inventorypage(jname.getText());
                              inventory.show();
@@ -477,12 +477,34 @@ public class LoginUsers extends javax.swing.JFrame {
                      
                              id=rs.getInt("user_id");
                             
-                        }                                                
+                        }  
+                        
+                        else if (rs.getString(9).equals("Supplier")) {
+                            JOptionPane.showMessageDialog(null, "Hello supplier " + uname + "!" + " Welcome to" + "FaToTab" + "!!");
+//                            
+//                             inventory = new inventorypage(jname.getText());
+//                             inventory.show();
+//                            dispose();                 
+                     
+                             id=rs.getInt("user_id");
+                            
+                        }  
+                        
+                        else if (rs.getString(9).equals("Buyer")) {
+                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "FaToTab" + "You can now purchase our fresh product!!");
+//                            
+//                             inventory = new inventorypage(jname.getText());
+//                             inventory.show();
+//                            dispose();                 
+                     
+                             id=rs.getInt("user_id");
+                            
+                        }  
                     }
                    } else {
-                    JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
-                    
-                    jclearActionPerformed(evt);
+            
+                         JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
+                         jclearActionPerformed(evt);
                     
                 }
                    
@@ -498,11 +520,13 @@ public class LoginUsers extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Please wait for admin's approval");
                     }
                   }
+                   
+                
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
             } 
             
-             
+            
         }
 
     }//GEN-LAST:event_jloginActionPerformed
