@@ -426,14 +426,14 @@ public class LoginUsers extends javax.swing.JFrame {
                      
                             id=rs.getInt("user_id");
                             
-                                                try {
+                             try {
                                Statement st = con.createStatement();
                                String query1 = "select * from `registered_user`";
                                ResultSet rs2 = st.executeQuery(query1);
 
                                while(rs2.next()){
                                    //data wil added until finished..
-                                  String Id1 = rs2.getString("id");
+                                       String Id1 = rs2.getString("user_id");
                                        String username1 = rs2.getString("username");
                                        String password1 = rs2.getString("password");
                                        String email_id1 = rs2.getString("email");
@@ -501,6 +501,7 @@ public class LoginUsers extends javax.swing.JFrame {
                             
                         }  
                     }
+                    
                    } else {
             
                          JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
@@ -519,8 +520,18 @@ public class LoginUsers extends javax.swing.JFrame {
                     if(rs1.getString(10).equals("Inactive")){
                         JOptionPane.showMessageDialog(null, "Please wait for admin's approval");
                     }
+                    
                   }
-                   
+                  
+                  String sql2 = "SELECT * FROM `declined_registrants` WHERE  username=? AND password=?";
+                  PreparedStatement pst2 = con.prepareStatement(sql2);
+                  pst2.setString(1, uname);
+                  pst2.setString(2, pass);
+                   ResultSet rs2 = pst2.executeQuery();
+               
+                  if (rs2.next()) {
+                        JOptionPane.showMessageDialog(null, "Sorry Ms./Mr. "+uname+ ". Your registration has declined by the Admin.\n Just try it next time!!");     
+                  }
                 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);

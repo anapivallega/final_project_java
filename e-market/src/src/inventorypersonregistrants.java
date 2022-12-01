@@ -68,7 +68,7 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
   {
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
-        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bebieinventorysystem", "root", "");
+        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/marketsystem", "root", "");
     } catch (ClassNotFoundException ex){
          Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
     }   catch (SQLException ex) {
@@ -78,7 +78,7 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
   }
     
     private void  deleteinvpersonusers(){
-        String sql ="select id, username, password, email_id, gender,age,status from `users` where role='Staff'";
+        String sql ="select user_id, username, password, email, gender,age,status from `registered_user` where role='Staff'";
         try{
             pst=con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -139,7 +139,7 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
 
         public void inpersonsupdate(){
              try{
-           pst = con.prepareStatement("select id, username, password, email_id, gender,age,status from `users` where role='Staff'");
+           pst = con.prepareStatement("select user_id, username, password, email, gender,age,status from `registered_user` where role='Staff'");
            rs = pst.executeQuery();
            
            ResultSetMetaData rsd = rs.getMetaData();
@@ -154,10 +154,10 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
                Vector v2 = new Vector();
                for(int i=1; i<=c; i++)
                {
-                   v2.add(rs.getString("id"));
+                   v2.add(rs.getString("user_id"));
                    v2.add(rs.getString("username"));
                    v2.add(rs.getString("password"));
-                   v2.add(rs.getString("email_id"));
+                   v2.add(rs.getString("email"));
                    v2.add(rs.getString("gender"));
                    v2.add(rs.getString("age"));
                    v2.add(rs.getString("status"));
@@ -189,8 +189,6 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jclear = new javax.swing.JButton();
         jDelete = new javax.swing.JButton();
@@ -252,15 +250,6 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/flowercon.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ImageIcon_1.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -274,41 +263,29 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(186, 186, 186)
                 .addComponent(jLabel16)
                 .addGap(56, 56, 56)
                 .addComponent(jLabel15)
                 .addGap(49, 49, 49)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                 .addComponent(jusernames)
                 .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel8))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(16, 16, 16)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jusernames)
@@ -483,7 +460,7 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     if(jTable3.getSelectedRowCount() == 1){
         int row =jTable3.getSelectedRow();
         String cell = jTable3.getModel().getValueAt(row, 0).toString();
-        String sql="DELETE FROM `users` where id= " + cell;
+        String sql="DELETE FROM `registered_user` where user_id= " + cell;
         
         try{
             pst = con.prepareStatement(sql);
@@ -596,12 +573,8 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         String status;
        status = jstatus.getSelectedItem().toString();
        
- 
-     
-  
-
         try{
-            pst = con.prepareStatement("UPDATE users set username= ?, password= ?, email_id= ?, gender= ?, age= ?, status= ? where id= ?");
+            pst = con.prepareStatement("UPDATE registered_user set username= ?, password= ?, email= ?, gender= ?, age= ?, status= ? where user_id= ?");
             //
             pst.setString(1, uname );
             pst.setString(2, pass);
@@ -679,17 +652,6 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-        
-           LoginUsers cashregis = new LoginUsers();
-        cashregis.setVisible(true);
-        cashregis.pack();
-        cashregis.setLocationRelativeTo(null);
-        cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         LoginUsers cashregis = new  LoginUsers();
@@ -741,11 +703,9 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

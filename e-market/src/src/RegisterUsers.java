@@ -420,73 +420,102 @@ public class RegisterUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsaveActionPerformed
-        // TODO add your handling code here:
-
-        String username=jname.getText();
-        String password=String.valueOf(jpassword.getText());
-        String conpassword=String.valueOf(jconfirmpassword.getText());
-        String email_id=jemailid1.getText();
-        String gender= jgender.getText();
-        String age= jage.getText();
+       
+            // TODO add your handling code here:
+          
+            
+            String username=jname.getText();
+            String password=String.valueOf(jpassword.getText());
+            String conpassword=String.valueOf(jconfirmpassword.getText());
+            String email_id=jemailid1.getText();
+            String gender= jgender.getText();
+            String age= jage.getText();
 //         int x =Integer.parseInt("9");
 //        int age = Integer.parseInt(jage.getText());
-        String role;
-        String phone=jphone.getText();
-        String datea=date.getText();
-        role=jrole.getSelectedItem().toString();
-//          Date datee= jDate.getDate();
-//        
-        String status = "Inactive";
-      
-         if 
-           (username.trim().equals("") || username.trim().equals("") ||
-            password.trim().equals("") || password.trim().equals("") ||
-            conpassword.trim().equals("") ||  conpassword.trim().equals("") ||
-            email_id.trim().equals("") || email_id.trim().equals("") ||
-            gender.trim().equals("") ||  gender.trim().equals("") ||
-            phone.trim().equals("") ||  phone.trim().equals("") ||
-            age.trim().equals("") ||  age.trim().equals(""))
+                String role;
+                String phone=jphone.getText();
+                String datea=date.getText();
+                role=jrole.getSelectedItem().toString();
+                //          Date datee= jDate.getDate();
+                //
+                String status = "Inactive";
+//                
+//             try {    
+//                
+//                  
+//                String sql2 = "SELECT * FROM `registered_user` WHERE  username=? AND password=?";
+//                PreparedStatement pst2 = con.prepareStatement(sql2);
+//                pst2.setString(1, username);
+//                pst2.setString(2, password);
+//
+//                ResultSet rs2 = pst2.executeQuery();
+//                
+//               if (rs2.next()) {
+//
+//                    JOptionPane.showMessageDialog(null, "Account with the password "+"'" +password +"'"+ " and username " +"'" +username +"'"+" is already exist!! please try another one!");
+//               }
+//                    
+//                   
+            
 
-        {
-            JOptionPane.showMessageDialog(null, "Other fields are empty!");
-        }
+              if
+                        (username.trim().equals("") || username.trim().equals("") ||
+                        password.trim().equals("") || password.trim().equals("") ||
+                        conpassword.trim().equals("") ||  conpassword.trim().equals("") ||
+                        email_id.trim().equals("") || email_id.trim().equals("") ||
+                        gender.trim().equals("") ||  gender.trim().equals("") ||
+                        phone.trim().equals("") ||  phone.trim().equals("") ||
+                        age.trim().equals("") ||  age.trim().equals(""))
 
-        else if(password.equals(conpassword)){
+                {
+                    JOptionPane.showMessageDialog(null, "Other fields are empty!");
+                }
+               
 
-        }
 
-        else {
 
-            JOptionPane.showMessageDialog(null, "Password and Confirm Password must be same!!");
-            jpassword.setText("");
-            jconfirmpassword.setText("");
-        } 
-        if(jname.getText().length()<=0 ||
-            jpassword.getText().length()<=0 ||
-            jconfirmpassword.getText().length()<=0 ||
-            jphone.getText().length()<=0 ||
-            jemailid1.getText().length()<=0 ||
-//                jDate.getDate().length() ||
-            jgender.getText().length()<=0 ||
-            jage.getText().length()<=0 )
+                else if(password.equals(conpassword)){
 
-          {
+                }
 
-          }  
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Form submitted!");
-            approveuser();
-           jname.setText("");
-           jpassword.setText("");
-           jconfirmpassword.setText("");
-           jphone.setText("");
-           jemailid1.setText("");
-           jgender.setText("");
-           jage.setText("");
-           jrole.setSelectedIndex(0);
+                else {
 
-        }
+                    JOptionPane.showMessageDialog(null, "Password and Confirm Password must be same!!");
+                    jpassword.setText("");
+                    jconfirmpassword.setText("");
+                }
+                if(jname.getText().length()<=0 ||
+                        jpassword.getText().length()<=0 ||
+                        jconfirmpassword.getText().length()<=0 ||
+                        jphone.getText().length()<=0 ||
+                        jemailid1.getText().length()<=0 ||
+                //                jDate.getDate().length() ||
+                        jgender.getText().length()<=0 ||
+                        jage.getText().length()<=0 )
+
+                {
+
+                }
+                  
+               
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Form submitted!");
+                            approveuser();
+                            jname.setText("");
+                            jpassword.setText("");
+                            jconfirmpassword.setText("");
+                            jphone.setText("");
+                            jemailid1.setText("");
+                            jgender.setText("");
+                            jage.setText("");
+                            jrole.setSelectedIndex(0);
+
+                        }
+//                 } catch (SQLException ex) {
+//                   Logger.getLogger(RegisterUsers.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+////       
         
 
     }//GEN-LAST:event_jsaveActionPerformed

@@ -132,18 +132,21 @@ public class adminpage extends javax.swing.JFrame {
 
             while(rs1.next()){
                 //data wil added until finished..
-                String Id1 = rs1.getString("id");
+                String Id1 = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
+                  String phone = rs1.getString("phone_number");
+                    String dat = rs1.getString("date");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String rolr = rs1.getString("role");
 
                 String status1= rs1.getString("status");
-
+                
+                        
                 //string array for store data into jtable..
-                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,rolr,status1};
+                String tbData[] = {Id1,username1,password1,email_id1,phone,dat,gender1,age1,rolr,status1};
                 DefaultTableModel tblModel = (DefaultTableModel)jTable20.getModel();
 
                 //add string array data into jtable..
@@ -197,7 +200,7 @@ public class adminpage extends javax.swing.JFrame {
         }
         public void usersupdate(){
        try{
-           pst = con.prepareStatement("select * from `users`");
+           pst = con.prepareStatement("select * from `registered_user`");
            rs = pst.executeQuery();
            
            ResultSetMetaData rsd = rs.getMetaData();
@@ -212,15 +215,18 @@ public class adminpage extends javax.swing.JFrame {
                Vector v2 = new Vector();
                for(int i=1; i<=c; i++)
                {
-                   v2.add(rs.getString("id"));
+                   v2.add(rs.getString("user_id"));
                    v2.add(rs.getString("username"));
                    v2.add(rs.getString("password"));
-                   v2.add(rs.getString("email_id"));
+                   v2.add(rs.getString("email"));
+                   v2.add(rs.getString("phone_number"));
+                   v2.add(rs.getString("date"));
                    v2.add(rs.getString("gender"));
                    v2.add(rs.getString("age"));
-                   v2.add(rs.getString("role"));
-                   v2.add(rs.getString("status"));
+                    v2.add(rs.getString("role"));
+                      v2.add(rs.getString("role"));
                    
+                          
                }
                de.addRow(v2);
            }
@@ -232,7 +238,7 @@ public class adminpage extends javax.swing.JFrame {
         
         
         public void  deleteusers(){
-        String sql ="select from `users`";
+        String sql ="select from `registered_users`";
         try{
             pst=con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -665,9 +671,9 @@ public class adminpage extends javax.swing.JFrame {
                 String totl2 = rs1.getString("total");
                  String dae = rs1.getString("date");
                 String usr2 = rs1.getString("userid");
-
+                 String sup = rs1.getString("supplier");
                 //string array for store data into jtable..
-                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,dae,usr2};
+                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,dae,usr2,sup};
                 DefaultTableModel tabledata = (DefaultTableModel)jTable9.getModel();
 
                 //add string array data into jtable..
@@ -742,17 +748,22 @@ public class adminpage extends javax.swing.JFrame {
 
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
-                String gender1 = rs1.getString("gender");
-                String age1 = rs1.getString("age");
-                String rol= rs1.getString("role");
+                String email_id1 = rs1.getString("email");
+                String phone = rs1.getString("phone_number");
+                String dts = rs1.getString("date");
+                String gen= rs1.getString("gender");
+                String ag= rs1.getString("age");
+                String ro= rs1.getString("role");
+                String sta= rs1.getString("status");
+                
+                
 //                String sts = rs1.getString("status");
 
                 //string array for store data into jtable..
-                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,rol};
+                String tbData[] = {bid,username1,password1,email_id1,phone,dts,gen,ag,ro,sta};
 
                 DefaultTableModel modelu = (DefaultTableModel)jTable10.getModel();
 
@@ -816,15 +827,17 @@ public class adminpage extends javax.swing.JFrame {
         dispose();
          try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Staff'";
+            String query1 = "select user_id, username, password, email, gender, age, status from `registered_user` where role='Staff'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
+//                  String pho = rs1.getString("phone_number");
+//                  String dt = rs1.getString("date");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");
@@ -855,15 +868,15 @@ public class adminpage extends javax.swing.JFrame {
         
          try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender,age,status from `users` where role='Admin'";
+            String query1 = "select user_id, username, password, email, gender,age,status from `registered_user` where role='Admin'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");
@@ -893,15 +906,15 @@ public class adminpage extends javax.swing.JFrame {
 
        try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Cashier'";
+            String query1 = "select user_id, username, password, email, gender, age, status from `registered_user` where role='Cashier'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");

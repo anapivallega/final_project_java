@@ -65,7 +65,7 @@ public class cashierusers extends javax.swing.JFrame {
   {
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
-        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bebieinventorysystem", "root", "");
+        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/marketsystem", "root", "");
     } catch (ClassNotFoundException ex){
          Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
     }   catch (SQLException ex) {
@@ -108,7 +108,7 @@ public class cashierusers extends javax.swing.JFrame {
   }
      
       public void deletecashierusers(){
-        String sql ="select id, username, password, email_id, gender,age,status from `users` where role='Cashier'";
+        String sql ="select user_id, username, password, email, gender,age,status from `registered_user` where role='Cashier'";
         try{
             pst=con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -128,7 +128,7 @@ public class cashierusers extends javax.swing.JFrame {
       }
         public void cashiersupdate(){
        try{
-           pst = con.prepareStatement("select id, username, password, email_id, gender,age,status from `users` where role='Cashier'");
+           pst = con.prepareStatement("select user_id, username, password, email, gender,age,status from `registered_user` where role='Cashier'");
            rs = pst.executeQuery();
            
            ResultSetMetaData rsd = rs.getMetaData();
@@ -143,10 +143,10 @@ public class cashierusers extends javax.swing.JFrame {
                Vector v2 = new Vector();
                for(int i=1; i<=c; i++)
                {
-                   v2.add(rs.getString("id"));
+                   v2.add(rs.getString("user_id"));
                    v2.add(rs.getString("username"));
                    v2.add(rs.getString("password"));
-                   v2.add(rs.getString("email_id"));
+                   v2.add(rs.getString("email"));
                    v2.add(rs.getString("gender"));
                    v2.add(rs.getString("age"));
                    v2.add(rs.getString("status"));
@@ -175,7 +175,6 @@ public class cashierusers extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -240,8 +239,6 @@ public class cashierusers extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Approve  New Users");
@@ -273,17 +270,12 @@ public class cashierusers extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel8)
-                .addGap(86, 86, 86)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(92, 92, 92)
                 .addComponent(jusername)
                 .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -531,7 +523,7 @@ public class cashierusers extends javax.swing.JFrame {
         status = jstatus.getSelectedItem().toString();
 
         try{
-            pst = con.prepareStatement("UPDATE users set username= ?, password= ?, email_id= ?, gender= ?, age= ?, status= ? where id= ?");
+            pst = con.prepareStatement("UPDATE registered_user set username= ?, password= ?, email= ?, gender= ?, age= ?, status= ? where user_id= ?");
             //
             pst.setString(1, uname );
             pst.setString(2, pass);
@@ -583,7 +575,7 @@ public class cashierusers extends javax.swing.JFrame {
         if(jTable12.getSelectedRowCount() == 1){
         int row =jTable12.getSelectedRow();
         String cell = jTable12.getModel().getValueAt(row, 0).toString();
-        String sql="DELETE FROM `users` where id= " + cell;
+        String sql="DELETE FROM `registered_user` where user_id= " + cell;
 
         try{
             pst = con.prepareStatement(sql);
@@ -666,10 +658,10 @@ public class cashierusers extends javax.swing.JFrame {
 
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String rol= rs1.getString("role");
@@ -748,7 +740,6 @@ public class cashierusers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
