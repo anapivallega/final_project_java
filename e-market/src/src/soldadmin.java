@@ -1000,7 +1000,7 @@ public class soldadmin extends javax.swing.JFrame {
         String tal =jtotal.getText();
 
         try{
-            pst = con.prepareStatement("UPDATE sales_products set sales_id= ?, product_name= ?, buyingprice= ?,price= ?, quantity= ?,  total= ? where id= ?");
+            pst = con.prepareStatement("UPDATE sales_products set sales_id= ?, product_name= ?, buyingprice= ?,price= ?, quantity= ?,  total= ? where product_id= ?");
             //
             pst.setString(1, sa);
             pst.setString(2, na);
