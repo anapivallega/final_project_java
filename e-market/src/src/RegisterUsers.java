@@ -2,6 +2,7 @@
 package src;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.ModuleLayer.empty;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -167,6 +168,7 @@ public class RegisterUsers extends javax.swing.JFrame {
         jemailid1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         date = new javax.swing.JTextField();
+        jreset1 = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
@@ -198,8 +200,9 @@ public class RegisterUsers extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 102));
         jLabel7.setText("Age");
 
-        jsave.setBackground(new java.awt.Color(255, 255, 153));
+        jsave.setBackground(new java.awt.Color(102, 102, 102));
         jsave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jsave.setForeground(new java.awt.Color(153, 255, 102));
         jsave.setText("Submit");
         jsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,8 +210,9 @@ public class RegisterUsers extends javax.swing.JFrame {
             }
         });
 
-        jreset.setBackground(new java.awt.Color(255, 255, 153));
+        jreset.setBackground(new java.awt.Color(102, 102, 102));
         jreset.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jreset.setForeground(new java.awt.Color(153, 255, 102));
         jreset.setText("Reset");
         jreset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +247,7 @@ public class RegisterUsers extends javax.swing.JFrame {
         jLabel10.setText("Role");
 
         jrole.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", " " }));
+        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", "Supplier", "Buyer", " ", " " }));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 102));
 
@@ -270,12 +274,12 @@ public class RegisterUsers extends javax.swing.JFrame {
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addGap(77, 77, 77)
                         .addComponent(jLabel1)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,6 +311,16 @@ public class RegisterUsers extends javax.swing.JFrame {
         date.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         date.setText("0");
 
+        jreset1.setBackground(new java.awt.Color(102, 102, 102));
+        jreset1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jreset1.setForeground(new java.awt.Color(153, 255, 102));
+        jreset1.setText("Sign-In");
+        jreset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jreset1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -337,9 +351,11 @@ public class RegisterUsers extends javax.swing.JFrame {
                             .addComponent(jrole, 0, 318, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addComponent(jreset1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(jreset, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
+                        .addGap(29, 29, 29)
                         .addComponent(jsave, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -383,8 +399,9 @@ public class RegisterUsers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jreset, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jsave, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jreset1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -395,82 +412,110 @@ public class RegisterUsers extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(698, 595));
+        setSize(new java.awt.Dimension(698, 579));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsaveActionPerformed
-        // TODO add your handling code here:
-
-        String username=jname.getText();
-        String password=String.valueOf(jpassword.getText());
-        String conpassword=String.valueOf(jconfirmpassword.getText());
-        String email_id=jemailid1.getText();
-        String gender= jgender.getText();
-        String age= jage.getText();
+       
+            // TODO add your handling code here:
+          
+            
+            String username=jname.getText();
+            String password=String.valueOf(jpassword.getText());
+            String conpassword=String.valueOf(jconfirmpassword.getText());
+            String email_id=jemailid1.getText();
+            String gender= jgender.getText();
+            String age= jage.getText();
+//         int x =Integer.parseInt("9");
 //        int age = Integer.parseInt(jage.getText());
-        String role;
-        String phone=jphone.getText();
-        String datea=date.getText();
-        role=jrole.getSelectedItem().toString();
-//          Date datee= jDate.getDate();
-//        
-        String status = "Inactive";
-      
-         if 
-           (username.trim().equals("") || username.trim().equals("") ||
-            password.trim().equals("") || password.trim().equals("") ||
-            conpassword.trim().equals("") ||  conpassword.trim().equals("") ||
-            email_id.trim().equals("") || email_id.trim().equals("") ||
-            gender.trim().equals("") ||  gender.trim().equals("") ||
-            phone.trim().equals("") ||  phone.trim().equals("") ||
-            age.trim().equals("") ||  age.trim().equals(""))
+                String role;
+                String phone=jphone.getText();
+                String datea=date.getText();
+                role=jrole.getSelectedItem().toString();
+                //          Date datee= jDate.getDate();
+                //
+                String status = "Inactive";
+//                
+//             try {    
+//                
+//                  
+//                String sql2 = "SELECT * FROM `registered_user` WHERE  username=? AND password=?";
+//                PreparedStatement pst2 = con.prepareStatement(sql2);
+//                pst2.setString(1, username);
+//                pst2.setString(2, password);
+//
+//                ResultSet rs2 = pst2.executeQuery();
+//                
+//               if (rs2.next()) {
+//
+//                    JOptionPane.showMessageDialog(null, "Account with the password "+"'" +password +"'"+ " and username " +"'" +username +"'"+" is already exist!! please try another one!");
+//               }
+//                    
+//                   
+            
 
-        {
-            JOptionPane.showMessageDialog(null, "Other fields are empty!");
-        }
+              if
+                        (username.trim().equals("") || username.trim().equals("") ||
+                        password.trim().equals("") || password.trim().equals("") ||
+                        conpassword.trim().equals("") ||  conpassword.trim().equals("") ||
+                        email_id.trim().equals("") || email_id.trim().equals("") ||
+                        gender.trim().equals("") ||  gender.trim().equals("") ||
+                        phone.trim().equals("") ||  phone.trim().equals("") ||
+                        age.trim().equals("") ||  age.trim().equals(""))
 
-        else if(password.equals(conpassword)){
+                {
+                    JOptionPane.showMessageDialog(null, "Other fields are empty!");
+                }
+               
 
-        }
 
-        else {
 
-            JOptionPane.showMessageDialog(null, "Password and Confirm Password must be same!!");
-            jpassword.setText("");
-            jconfirmpassword.setText("");
-        } 
-        if(jname.getText().length()<=0 ||
-            jpassword.getText().length()<=0 ||
-            jconfirmpassword.getText().length()<=0 ||
-            jphone.getText().length()<=0 ||
-            jemailid1.getText().length()<=0 ||
-//                jDate.getDate().length() ||
-            jgender.getText().length()<=0 ||
-            jage.getText().length()<=0 )
+                else if(password.equals(conpassword)){
 
-          {
+                }
 
-          }  
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Form submitted!");
-            approveuser();
-           jname.setText("");
-           jpassword.setText("");
-           jconfirmpassword.setText("");
-           jphone.setText("");
-           jemailid1.setText("");
-           jgender.setText("");
-           jage.setText("");
-           jrole.setSelectedIndex(0);
+                else {
 
-        }
+                    JOptionPane.showMessageDialog(null, "Password and Confirm Password must be same!!");
+                    jpassword.setText("");
+                    jconfirmpassword.setText("");
+                }
+                if(jname.getText().length()<=0 ||
+                        jpassword.getText().length()<=0 ||
+                        jconfirmpassword.getText().length()<=0 ||
+                        jphone.getText().length()<=0 ||
+                        jemailid1.getText().length()<=0 ||
+                //                jDate.getDate().length() ||
+                        jgender.getText().length()<=0 ||
+                        jage.getText().length()<=0 )
+
+                {
+
+                }
+                  
+               
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Form submitted!");
+                            approveuser();
+                            jname.setText("");
+                            jpassword.setText("");
+                            jconfirmpassword.setText("");
+                            jphone.setText("");
+                            jemailid1.setText("");
+                            jgender.setText("");
+                            jage.setText("");
+                            jrole.setSelectedIndex(0);
+
+                        }
+//                 } catch (SQLException ex) {
+//                   Logger.getLogger(RegisterUsers.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+////       
         
 
     }//GEN-LAST:event_jsaveActionPerformed
@@ -512,6 +557,15 @@ public class RegisterUsers extends javax.swing.JFrame {
     private void jemailid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jemailid1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jemailid1ActionPerformed
+
+    private void jreset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jreset1ActionPerformed
+        // TODO add your handling code here:
+        
+        LoginUsers log = new LoginUsers();
+        log.pack();
+        log.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jreset1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,6 +626,7 @@ public class RegisterUsers extends javax.swing.JFrame {
     private javax.swing.JPasswordField jpassword;
     private javax.swing.JTextField jphone;
     private javax.swing.JButton jreset;
+    private javax.swing.JButton jreset1;
     private javax.swing.JComboBox<String> jrole;
     private javax.swing.JButton jsave;
     // End of variables declaration//GEN-END:variables

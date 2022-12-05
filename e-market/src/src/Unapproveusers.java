@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import static src.ApprovedUsers.jTable11;
+import static src.Customer.jTable11;
 
 import static src.category.jTable6;
 
@@ -60,7 +60,9 @@ public class Unapproveusers extends javax.swing.JFrame {
         jemailid.setEnabled(false);
         jgender.setEnabled(false);
         jage.setEnabled(false);
-         jrole.setEnabled(false);
+        jrole.setEnabled(false);
+        jphone.setEnabled(false);
+        jdate.setEnabled(false);
            
         
     }
@@ -129,6 +131,8 @@ public class Unapproveusers extends javax.swing.JFrame {
        String email_id = jemailid.getText();
        String gender = jgender.getText();
        String age = jage.getText();
+       String phone = jdate.getText();
+        String dta = date1.getText();
      
        String role1;
        role1=jrole.getSelectedItem().toString();
@@ -138,20 +142,23 @@ public class Unapproveusers extends javax.swing.JFrame {
       
       try{
         
-          String query ="insert into `users`(username,password,email_id,gender,age,role,status)values(?,?,?,?,?,?,?);";
+          String query ="insert into `registered_user`(username,password,email,phone_number,date,gender,age,role,status)values(?,?,?,?,?,?,?,?,?);";
           pst = con.prepareStatement(query);
           
           pst.setString(1, username);
           pst.setString(2, password);
           pst.setString(3, email_id);
-          pst.setString(4, gender);
-          pst.setString(5, age);
+           pst.setString(4, phone);
+          pst.setString(5, dta);
+          pst.setString(6, gender);
+          
+          pst.setString(7, age);
 //          pst.setInt(5, Integer.valueOf(jage.getText()));
        
-          pst.setString(6, role1);
+          pst.setString(8, role1);
           
       
-          pst.setString(7, "Active");
+          pst.setString(9, "Active");
           pst.executeUpdate();
 
           
@@ -182,7 +189,74 @@ public class Unapproveusers extends javax.swing.JFrame {
       }
   
   }
-//      
+//    
+        public void todecline()
+  {
+      
+      
+       String username = jname.getText();
+       String password = jpassword.getText();
+       String email_id = jemailid.getText();
+       String gender = jgender.getText();
+       String age = jage.getText();
+       String phone = jdate.getText();
+        String dta = date1.getText();
+     
+       String role1;
+       role1=jrole.getSelectedItem().toString();
+      
+//       String status;
+//       status=jstatus.getSelectedItem().toString();
+      
+      try{
+        
+          String query ="insert into `declined_registrants`(username,password,email,phone_number,date,gender,age,role,status)values(?,?,?,?,?,?,?,?,?);";
+          pst = con.prepareStatement(query);
+          
+          pst.setString(1, username);
+          pst.setString(2, password);
+          pst.setString(3, email_id);
+           pst.setString(4, phone);
+          pst.setString(5, dta);
+          pst.setString(6, gender);
+          
+          pst.setString(7, age);
+//          pst.setInt(5, Integer.valueOf(jage.getText()));
+       
+          pst.setString(8, role1);
+          
+      
+          pst.setString(9, "Active");
+          pst.executeUpdate();
+
+          
+          
+          
+          
+//          pst.setString(1, username);
+//          pst.setString(2, password);
+//          pst.setString(3, email_id);
+//          pst.setString(4, gender);
+//          pst.setString(5, age);
+////          pst.setInt(5, Integer.valueOf(jage.getText()));
+//          pst.setString(6, role1);
+//          pst.setString(7, status);
+//          pst.executeUpdate();
+
+//           int i=pst.executeUpdate();
+           
+            
+//            JOptionPane.showMessageDialog(null, "inserted");
+                  
+//            else{
+//                      JOptionPane.showMessageDialog(null, username+"  You are NOT! successfully registered as Admin User!" + "Failed with User id as Email id"+email_id); 
+//                    }
+          
+      }catch(SQLException ex){
+           Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
+      }
+  
+  }
  
        public void updateuserapplicant(){
         String sql ="select from `user_applicant`";
@@ -251,12 +325,15 @@ public class Unapproveusers extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jrole = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
+        jdate = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jphone = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         juserun = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -275,7 +352,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Username", "Password", "Email id", "Gender", "Age", "Role"
+                "Id", "Username", "Password", "Email id", "phone", "date", "Gender", "Age", "Role"
             }
         ));
         jTable10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -304,27 +381,36 @@ public class Unapproveusers extends javax.swing.JFrame {
         });
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Username");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Password");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Email ID");
+        jLabel9.setText("Email ");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Gender");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Age");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         jemailid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(jemailid, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 170, 31));
 
         jage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(jage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 170, 32));
 
         jgender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(jgender, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 170, 32));
 
         jname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jname.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,6 +418,7 @@ public class Unapproveusers extends javax.swing.JFrame {
                 jnameMouseClicked(evt);
             }
         });
+        jPanel3.add(jname, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 170, 30));
 
         jpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jpassword.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -339,81 +426,34 @@ public class Unapproveusers extends javax.swing.JFrame {
                 jpasswordMouseClicked(evt);
             }
         });
+        jPanel3.add(jpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 100, 170, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText(" User Data");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 6, -1, -1));
 
         jrole.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", " " }));
+        jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", "Supplier", "Buyer" }));
+        jPanel3.add(jrole, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 170, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Role");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)))
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jname, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(jLabel5)))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(153, 153, 153))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(55, 55, 55))))
-        );
+        jdate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(jdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 170, 31));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Date");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+
+        jphone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(jphone, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 170, 31));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setText("Phone");
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 102));
 
@@ -448,8 +488,6 @@ public class Unapproveusers extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
-
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ImageIcon_1.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -466,29 +504,23 @@ public class Unapproveusers extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(juserun, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16)))
+                            .addComponent(jLabel16)
+                            .addComponent(juserun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(juserun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -561,23 +593,24 @@ public class Unapproveusers extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(217, 217, 217)
+                                .addGap(210, 210, 210)
                                 .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112)
-                                .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(125, 125, 125)
+                                .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(68, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,16 +623,19 @@ public class Unapproveusers extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(107, 107, 107))
+                            .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(88, 88, 88))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(53, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -631,10 +667,12 @@ public class Unapproveusers extends javax.swing.JFrame {
         jname.setText(model2.getValueAt(Myindex, 1).toString());
         jpassword.setText(model2.getValueAt(Myindex, 2).toString());
         jemailid.setText(model2.getValueAt(Myindex, 3).toString());
-        jgender.setText(model2.getValueAt(Myindex, 4).toString());
-        jage.setText(model2.getValueAt(Myindex, 5).toString());
+        jphone.setText(model2.getValueAt(Myindex, 4).toString());
+         jdate.setText(model2.getValueAt(Myindex, 5).toString());
+        jgender.setText(model2.getValueAt(Myindex, 6).toString());
+        jage.setText(model2.getValueAt(Myindex, 7).toString());
         
-        String rolea =model2.getValueAt(Myindex, 6).toString();
+        String rolea =model2.getValueAt(Myindex, 8).toString();
         
         switch(rolea){
             case "Cashier":
@@ -642,7 +680,13 @@ public class Unapproveusers extends javax.swing.JFrame {
                 break;
             case "Staff":
                 jrole.setSelectedIndex(1);
-                break;        
+                break;  
+             case "Supplier":
+                jrole.setSelectedIndex(2);
+                break; 
+              case "Buyer":
+                jrole.setSelectedIndex(3);
+                break; 
         }
         
 //        String statusa = model2.getValueAt(Myindex, 7).toString();
@@ -674,7 +718,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 
         String cell = jTable10.getModel().getValueAt(row, 0).toString();
 
-        String sql = "DELETE FROM `user_applicant` where id= " + cell;
+        String sql = "DELETE FROM `user_applicant` where user_id= " + cell;
 
         try {
             pst = con.prepareStatement(sql);
@@ -702,6 +746,8 @@ public class Unapproveusers extends javax.swing.JFrame {
               jname.setText("");
               jpassword.setText("");
               jemailid.setText("");
+              jdate.setText("");
+              jphone.setText("");
               jgender.setText("");
               jage.setText("");
               jrole.setSelectedIndex(0);
@@ -727,7 +773,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 
     private void jremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jremoveActionPerformed
         // TODO add your handling code here:
-        
+         todecline();
         DefaultTableModel tbmodel = (DefaultTableModel) jTable10.getModel();
         if (jTable10.getSelectedRowCount() == 1) {
             
@@ -736,7 +782,7 @@ public class Unapproveusers extends javax.swing.JFrame {
             role1 = jrole.getSelectedItem().toString();
             int row = jTable10.getSelectedRow();
             String cell = jTable10.getModel().getValueAt(row, 0).toString();
-            String sql = "DELETE FROM `user_applicant` where id= " + cell;
+            String sql = "DELETE FROM `user_applicant` where user_id= " + cell;
 
             try {
                 pst = con.prepareStatement(sql);
@@ -763,6 +809,7 @@ public class Unapproveusers extends javax.swing.JFrame {
                     jpassword.setText("");
                     jemailid.setText("");
                     jgender.setText("");
+                    jdate.setText("");
                     jage.setText("");
                 }
             }
@@ -858,19 +905,17 @@ public class Unapproveusers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField date;
     private javax.swing.JTextField date1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -880,20 +925,20 @@ public class Unapproveusers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable10;
     public javax.swing.JTextField jage;
     private javax.swing.JButton japprove;
+    public javax.swing.JTextField jdate;
     public javax.swing.JTextField jemailid;
     public javax.swing.JTextField jgender;
     public javax.swing.JTextField jname;
     public javax.swing.JPasswordField jpassword;
+    public javax.swing.JTextField jphone;
     private javax.swing.JButton jremove;
     private javax.swing.JComboBox<String> jrole;
     public javax.swing.JLabel juserun;
-    private javax.swing.JTextField time;
     private javax.swing.JTextField time1;
     // End of variables declaration//GEN-END:variables
 }

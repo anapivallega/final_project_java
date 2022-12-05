@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -29,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 //import static src.cashierregistrants.jTable2;
 import static src.category.jTable6;
-import static src.categorycashier.jTable56;
+//import static src.categorycashier.jTable56;
 import static src.inventorypage.jTable4;
 import static src.soldproducts.jTable5;
 
@@ -71,6 +74,9 @@ public class cashierpage extends javax.swing.JFrame {
        DefaultTableModel model6 = (DefaultTableModel)jTable6.getModel(); 
        model6.addRow(dataRow);
      }
+     
+     URL ic =getClass().getResource("/images/ImageIcon_1.png");
+     Icon ci = new ImageIcon(ic);
     
       
     Connection con;
@@ -88,7 +94,7 @@ public class cashierpage extends javax.swing.JFrame {
   {
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
-        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bebieinventorysystem", "root", "");
+        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/marketsystem", "root", "");
     } catch (ClassNotFoundException ex){
          Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
     }   catch (SQLException ex) {
@@ -102,7 +108,7 @@ public class cashierpage extends javax.swing.JFrame {
       String nme= jcode.getText();
       try{
          Class.forName("com.mysql.cj.jdbc.Driver");
-         con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bebieinventorysystem", "root", "");
+         con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/marketsystem", "root", "");
           pst = con.prepareStatement("select * from products where barcode=?");
           pst.setString(1, nme);
           rs = pst.executeQuery();
@@ -444,7 +450,6 @@ public class cashierpage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jusername = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jreciept = new javax.swing.JTextArea();
@@ -456,6 +461,21 @@ public class cashierpage extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jtot = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        date = new javax.swing.JTextField();
+        time = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        date1 = new javax.swing.JTextField();
+        time1 = new javax.swing.JTextField();
+        jPanel68 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        date3 = new javax.swing.JTextField();
+        time3 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -486,6 +506,7 @@ public class cashierpage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -670,6 +691,8 @@ public class cashierpage extends javax.swing.JFrame {
                         .addGap(67, 67, 67))))
         );
 
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, 220));
+
         jTable2.setBackground(new java.awt.Color(204, 255, 153));
         jTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -687,14 +710,18 @@ public class cashierpage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 655, 129));
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 255, 102));
         jButton1.setText("Print Invoice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 550, 141, 47));
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 102));
 
@@ -732,45 +759,42 @@ public class cashierpage extends javax.swing.JFrame {
         jusername.setForeground(new java.awt.Color(255, 0, 0));
         jusername.setText("Cashieruser");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(191, 191, 191)
                 .addComponent(jLabel19)
-                .addGap(126, 126, 126)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel18)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
                 .addComponent(jusername, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addGap(22, 22, 22))
+                .addGap(28, 28, 28))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jusername, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
                             .addComponent(jLabel19)
-                            .addComponent(jLabel1))))
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(jLabel18)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jusername, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
 
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -783,7 +807,7 @@ public class cashierpage extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
@@ -792,9 +816,11 @@ public class cashierpage extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 200, -1, 330));
 
         jTable7.setBackground(new java.awt.Color(204, 255, 153));
         jTable7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -816,117 +842,222 @@ public class cashierpage extends javax.swing.JFrame {
             jTable7.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 122, 651, 118));
+
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(153, 255, 102));
         jLabel14.setText("Show Orders");
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel14MouseClicked(evt);
             }
         });
+        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 141, 102, 26));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setForeground(new java.awt.Color(153, 255, 102));
         jLabel15.setText("Hide Products");
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel15MouseClicked(evt);
             }
         });
+        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 185, 102, 26));
 
         jbuyp.setBackground(new java.awt.Color(204, 255, 153));
         jbuyp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel4.add(jbuyp, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 313, 125, 35));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 204, 204));
         jLabel16.setText("Total");
+        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 381, 89, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(204, 204, 204));
         jLabel17.setText("Buying Price");
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 284, 124, -1));
 
         jtot.setBackground(new java.awt.Color(204, 255, 153));
         jtot.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel4.add(jtot, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 411, 125, 35));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jbuyp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jtot, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 14, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))))
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Date:");
+
+        jLabel13.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Time:");
+
+        date.setBackground(new java.awt.Color(51, 51, 51));
+        date.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        date.setForeground(new java.awt.Color(204, 255, 204));
+        date.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date.setText("0");
+        date.setBorder(null);
+        date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateActionPerformed(evt);
+            }
+        });
+
+        time.setBackground(new java.awt.Color(51, 51, 51));
+        time.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time.setForeground(new java.awt.Color(204, 255, 204));
+        time.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time.setText("0");
+        time.setBorder(null);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel17)
-                                .addGap(7, 7, 7)
-                                .addComponent(jbuyp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel16)
-                                .addGap(8, 8, 8)
-                                .addComponent(jtot, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1490, Short.MAX_VALUE))
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 1044, -1, -1));
+
+        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Date:");
+
+        jLabel21.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Time:");
+
+        date1.setBackground(new java.awt.Color(51, 51, 51));
+        date1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        date1.setForeground(new java.awt.Color(204, 255, 204));
+        date1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date1.setText("0");
+        date1.setBorder(null);
+        date1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                date1ActionPerformed(evt);
+            }
+        });
+
+        time1.setBackground(new java.awt.Color(51, 51, 51));
+        time1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time1.setForeground(new java.awt.Color(204, 255, 204));
+        time1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time1.setText("0");
+        time1.setBorder(null);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 1044, -1, -1));
+
+        jPanel68.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Date:");
+
+        jLabel25.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Time:");
+
+        date3.setBackground(new java.awt.Color(51, 51, 51));
+        date3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        date3.setForeground(new java.awt.Color(204, 255, 204));
+        date3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date3.setText("0");
+        date3.setBorder(null);
+        date3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                date3ActionPerformed(evt);
+            }
+        });
+
+        time3.setBackground(new java.awt.Color(51, 51, 51));
+        time3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time3.setForeground(new java.awt.Color(204, 255, 204));
+        time3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time3.setText("0");
+        time3.setBorder(null);
+
+        javax.swing.GroupLayout jPanel68Layout = new javax.swing.GroupLayout(jPanel68);
+        jPanel68.setLayout(jPanel68Layout);
+        jPanel68Layout.setHorizontalGroup(
+            jPanel68Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel68Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        jPanel68Layout.setVerticalGroup(
+            jPanel68Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel68Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel68Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(date3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(time3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.add(jPanel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(819, 128, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -945,18 +1076,257 @@ public class cashierpage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+    private void jPanel2ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentHidden
         // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2ComponentHidden
 
-        DefaultTableModel df = (DefaultTableModel)jTable7.getModel();
-        df.setRowCount(0);
-    }//GEN-LAST:event_jLabel15MouseClicked
+    private void jcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcodeKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            try{
+                String bcode = jcode.getText();
+                pst = (PreparedStatement) con.prepareStatement("select * from products where barcode = ?");
+                pst.setString(1, bcode);
+                rs = pst.executeQuery();
+                
+                if(rs.next() == false)
+                {
+                    JOptionPane.showMessageDialog(this, "Book Code not Found");
+                }
+                else
+                {
+                    String bname = rs.getString("product_name");
+                    jbname.setText(bname.trim());
+                    
+                    String price = rs.getString("sellingprice");
+                    jprice.setText(price.trim());
+                    
+                    quantity.requestFocus();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }//GEN-LAST:event_jcodeKeyPressed
+
+    private void jaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaddActionPerformed
+   
+        String buying = jbuyp.getText();
+        if (buying.trim().equals("") || buying.trim().equals(""))
+               {
+            JOptionPane.showMessageDialog(null, "Enter Buying Price!");
+            
+        }else{
+                  pos();
+                 cashiertransac();
+        }
+            jbuyp.setText("");
+    
+                 
+//        int pay = Integer.parseInt(jpay.getText());
+//        int totalcost = Integer.parseInt(jtcost.getText());
+        
+//        int bal = pay - totalcost;
+//        jbalance.setText(String.valueOf(bal));
+//        String na=  jbname.getText();
+//        String pric = jprice.getText();
+//        String quan= jtquantity.getText();
+//    
+//        Date da = new Date();
+//        String datet =da.toString();
+////        jreciept.setText(jreciept.getText() + "\n====================================\n\n");
+////        jreciept.setText(jreciept.getText() + "              \n  " + datet + "           \n\n");
+//        jreciept.setText(jreciept.getText() + "\n______________________________________\n\n");
+//        jreciept.setText(jreciept.getText() + "Flower Name  --------------- : " + na + "\n\n");
+//        jreciept.setText(jreciept.getText() + "Price        --------------- : " + pric + "\n\n");
+//        jreciept.setText(jreciept.getText() + "Quatity      --------------- : " + quan + "\n\n");
+//        
+//        
+
+    }//GEN-LAST:event_jaddActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cashiertransacsold();
+        String payment = jpay.getText();
+       
+         if (payment.trim().equals("") || payment.trim().equals(""))
+               {
+            JOptionPane.showMessageDialog(null, "Enter Payment!");
+            
+        }
+         else {
+             
+        int pay = Integer.parseInt(jpay.getText());
+        int totalcost = Integer.parseInt(jtcost.getText());
+        sales();
+        int bal = pay - totalcost;
+        jbalance.setText(String.valueOf(bal));
+        String na=  jbname.getText();
+        String pric = jprice.getText();
+        String quan= jtquantity.getText();
+        String cost = jtcost.getText();
+        String balanc = jbalance.getText();
+        String cash = jpay.getText();
+       
+               
+        
+      
+        
+        
+        Date da = new Date();
+        String datet =da.toString();
+  
+//        jreciept.setText(jreciept.getText() + "\n====================================\n\n");
+//        jreciept.setText(jreciept.getText() + "              \n  " + datet + "           \n\n");
+        jreciept.setText(jreciept.getText() + "\n______________________________________\n\n");
+//        jreciept.setText(jreciept.getText() + "Flower Name  --------------- :" + na + "\n\n");
+//        jreciept.setText(jreciept.getText() + "Price        --------------- : " + pric + "\n\n");
+//        jreciept.setText(jreciept.getText() + "Quatity      --------------- : " + quan + "\n\n");
+
+        jreciept.setText(jreciept.getText() + "+++++++++BEBIE'S FLOWER SHOP+++++++++++++\n");
+        jreciept.setText(jreciept.getText() + "Total Cost   --------------- : " + cost + "\n\n");
+        jreciept.setText(jreciept.getText() + "Cash         --------------- : " + cash + "\n\n");
+        jreciept.setText(jreciept.getText() + "-------------------------------------------------\n\n");
+        jreciept.setText(jreciept.getText() + "Change       --------------- : " + balanc + "\n\n");
+        jreciept.setText(jreciept.getText() + "______________________________________________\n\n");
+        jreciept.setText(jreciept.getText() + "Save and Purchase\n\n");
+        jreciept.setText(jreciept.getText() + "Thank you Come again!!\n\n");
+        
+               jcode.setText("");
+               jbname.setText("");
+               jprice.setText("");
+               quantity.setValue(0);
+               jtcost.setText("");
+               jpay.setText("");
+              jtquantity.setText("");
+         } 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+     
+     
+            DefaultTableModel model1 = (DefaultTableModel)jTable2.getModel();
+            int Myindex = jTable2.getSelectedRow();
+            int Mycolumn = jTable2.getSelectedColumn();
+            
+            String value = model1.getValueAt(Myindex, Mycolumn).toString();
+            jcode.setText(model1.getValueAt(Myindex, 0).toString());
+            jbname.setText(model1.getValueAt(Myindex, 1).toString());
+                 jbuyp.setText(model1.getValueAt(Myindex, 2).toString());
+            jprice.setText(model1.getValueAt(Myindex, 3).toString());
+            int quantity_ = Integer.parseInt(model1.getValueAt(Myindex, 4).toString());
+            quantity.setValue((int)quantity_);
+       
+//          jtquantity.setText(model1.getValueAt(Myindex, 2).toString());
+            
+       
+   
+      
+        
+        
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
+        // TODO add your handling code here:
+                 cashiertransaccancel();
+         DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+         //delete row
+         if(jTable2.getSelectedRowCount()==1){
+             //if single row is selected then delete
+             model.removeRow(jTable2.getSelectedRow());
+             jcode.setText("");
+             jbname.setText("");
+             jprice.setText("");
+             quantity.setValue(0);
+              
+            //to subtract the total cost from the deleted sales
+            int numrow = jTable2.getRowCount();
+            double tot = 0;
+            double tot1 = 0;
+            
+            for (int i = 0; i<numrow; i++){
+                double val = Double.valueOf(jTable2.getValueAt(i, 3).toString());
+                double val1 = Double.valueOf(jTable2.getValueAt(i, 2).toString());
+                tot += val;   
+                tot1 += val1; 
+            }          
+            jtcost.setText(Double.toString(tot));
+            jtquantity.setText(Double.toString(tot1));
+//            jtotalc.setText(Double.toString(tot));
+//            jtotalq.setText(Double.toString(tot1));
+       
+            JOptionPane.showMessageDialog(this, "Order Cancelled!!");
+            
+  
+            }else{
+             if(jTable2.getRowCount()==0){
+                 //if table is not empty(no data) than display message
+                 JOptionPane.showMessageDialog(this, "Table is empty.");
+             }else{
+                 //if table is not empty but row is not selected or multiple row is selected
+                 
+                  JOptionPane.showMessageDialog(this, "Please select a single row to delete.");
+                  
+             }
+         }
+       
+    }//GEN-LAST:event_jButtondeleteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+               jcode.setText("");
+               jbname.setText("");
+               jprice.setText("");
+               quantity.setValue(0);
+             
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcodeActionPerformed
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        // TODO add your handling code here:
+               System.exit(0);
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        // TODO add your handling code here:
+        
+         LoginUsers main = new  LoginUsers();
+        main.setVisible(true);
+        main.pack();
+        main.setLocationRelativeTo(null);
+        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel19MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+        
+         LoginUsers cashregis = new LoginUsers();
+        cashregis.setVisible(true);
+        cashregis.pack();
+        cashregis.setLocationRelativeTo(null);
+        cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jtcostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtcostMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtcostMouseClicked
+
+    private void jTable7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable7MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
-
-        DefaultTableModel df = (DefaultTableModel)jTable7.getModel();
-        df.setRowCount(0);
+        
+         DefaultTableModel df = (DefaultTableModel)jTable7.getModel();
+         df.setRowCount(0);
         try {
             Statement st = con.createStatement();
             String query1 = "select * from `products`";
@@ -969,9 +1339,9 @@ public class cashierpage extends javax.swing.JFrame {
                 String bookn = rs1.getString("product_name");
                 String des = rs1.getString("description");
                 String qty = rs1.getString("quantity");
-                String price2 = rs1.getString("buyingprice");
-                String buy = rs1.getString("sellingprice");
-                String image = rs1.getString("productImage");
+                    String price2 = rs1.getString("buyingprice");
+                  String buy = rs1.getString("sellingprice");
+                   String image = rs1.getString("productImage");
 
                 //string array for store data into jtable..
                 String tbData[] = {bid,bookn,des,qty,price2,buy,image};
@@ -983,248 +1353,31 @@ public class cashierpage extends javax.swing.JFrame {
 
             }
 
-            //            con.close();
+//            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    
     }//GEN-LAST:event_jLabel14MouseClicked
 
-    private void jTable7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable7MouseClicked
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable7MouseClicked
+        
+           DefaultTableModel df = (DefaultTableModel)jTable7.getModel();
+           df.setRowCount(0);
+    }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_dateActionPerformed
 
-        LoginUsers cashregis = new LoginUsers();
-        cashregis.setVisible(true);
-        cashregis.pack();
-        cashregis.setLocationRelativeTo(null);
-        cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jLabel10MouseClicked
-
-    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+    private void date1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_date1ActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_date1ActionPerformed
 
-        LoginUsers main = new  LoginUsers();
-        main.setVisible(true);
-        main.pack();
-        main.setLocationRelativeTo(null);
-        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jLabel19MouseClicked
-
-    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+    private void date3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_date3ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jLabel18MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cashiertransacsold();
-        String payment = jpay.getText();
-
-        if (payment.trim().equals("") || payment.trim().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Enter Payment!");
-
-        }
-        else {
-
-            int pay = Integer.parseInt(jpay.getText());
-            int totalcost = Integer.parseInt(jtcost.getText());
-            sales();
-            int bal = pay - totalcost;
-            jbalance.setText(String.valueOf(bal));
-            String na=  jbname.getText();
-            String pric = jprice.getText();
-            String quan= jtquantity.getText();
-            String cost = jtcost.getText();
-            String balanc = jbalance.getText();
-            String cash = jpay.getText();
-
-            Date da = new Date();
-            String datet =da.toString();
-
-            //        jreciept.setText(jreciept.getText() + "\n====================================\n\n");
-            //        jreciept.setText(jreciept.getText() + "              \n  " + datet + "           \n\n");
-            jreciept.setText(jreciept.getText() + "\n______________________________________\n\n");
-            //        jreciept.setText(jreciept.getText() + "Flower Name  --------------- :" + na + "\n\n");
-            //        jreciept.setText(jreciept.getText() + "Price        --------------- : " + pric + "\n\n");
-            //        jreciept.setText(jreciept.getText() + "Quatity      --------------- : " + quan + "\n\n");
-
-            jreciept.setText(jreciept.getText() + "+++++++++BEBIE'S FLOWER SHOP+++++++++++++\n");
-            jreciept.setText(jreciept.getText() + "Total Cost   --------------- : " + cost + "\n\n");
-            jreciept.setText(jreciept.getText() + "Cash         --------------- : " + cash + "\n\n");
-            jreciept.setText(jreciept.getText() + "-------------------------------------------------\n\n");
-            jreciept.setText(jreciept.getText() + "Change       --------------- : " + balanc + "\n\n");
-            jreciept.setText(jreciept.getText() + "______________________________________________\n\n");
-            jreciept.setText(jreciept.getText() + "Save and Purchase\n\n");
-            jreciept.setText(jreciept.getText() + "Thank you Come again!!\n\n");
-
-            jcode.setText("");
-            jbname.setText("");
-            jprice.setText("");
-            quantity.setValue(0);
-            jtcost.setText("");
-            jpay.setText("");
-            jtquantity.setText("");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-
-        DefaultTableModel model1 = (DefaultTableModel)jTable2.getModel();
-        int Myindex = jTable2.getSelectedRow();
-        int Mycolumn = jTable2.getSelectedColumn();
-
-        String value = model1.getValueAt(Myindex, Mycolumn).toString();
-        jcode.setText(model1.getValueAt(Myindex, 0).toString());
-        jbname.setText(model1.getValueAt(Myindex, 1).toString());
-        jbuyp.setText(model1.getValueAt(Myindex, 2).toString());
-        jprice.setText(model1.getValueAt(Myindex, 3).toString());
-        int quantity_ = Integer.parseInt(model1.getValueAt(Myindex, 4).toString());
-        quantity.setValue((int)quantity_);
-
-        //          jtquantity.setText(model1.getValueAt(Myindex, 2).toString());
-
-    }//GEN-LAST:event_jTable2MouseClicked
-
-    private void jPanel2ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel2ComponentHidden
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jcode.setText("");
-        jbname.setText("");
-        jprice.setText("");
-        quantity.setValue(0);
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
-        // TODO add your handling code here:
-        cashiertransaccancel();
-        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-        //delete row
-        if(jTable2.getSelectedRowCount()==1){
-            //if single row is selected then delete
-            model.removeRow(jTable2.getSelectedRow());
-            jcode.setText("");
-            jbname.setText("");
-            jprice.setText("");
-            quantity.setValue(0);
-
-            //to subtract the total cost from the deleted sales
-            int numrow = jTable2.getRowCount();
-            double tot = 0;
-            double tot1 = 0;
-
-            for (int i = 0; i<numrow; i++){
-                double val = Double.valueOf(jTable2.getValueAt(i, 3).toString());
-                double val1 = Double.valueOf(jTable2.getValueAt(i, 2).toString());
-                tot += val;
-                tot1 += val1;
-            }
-            jtcost.setText(Double.toString(tot));
-            jtquantity.setText(Double.toString(tot1));
-            //            jtotalc.setText(Double.toString(tot));
-            //            jtotalq.setText(Double.toString(tot1));
-
-            JOptionPane.showMessageDialog(this, "Order Cancelled!!");
-
-        }else{
-            if(jTable2.getRowCount()==0){
-                //if table is not empty(no data) than display message
-                JOptionPane.showMessageDialog(this, "Table is empty.");
-            }else{
-                //if table is not empty but row is not selected or multiple row is selected
-
-                JOptionPane.showMessageDialog(this, "Please select a single row to delete.");
-
-            }
-        }
-
-    }//GEN-LAST:event_jButtondeleteActionPerformed
-
-    private void jaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaddActionPerformed
-
-        String buying = jbuyp.getText();
-        if (buying.trim().equals("") || buying.trim().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Enter Buying Price!");
-
-        }else{
-            pos();
-            cashiertransac();
-        }
-        jbuyp.setText("");
-
-        //        int pay = Integer.parseInt(jpay.getText());
-        //        int totalcost = Integer.parseInt(jtcost.getText());
-
-        //        int bal = pay - totalcost;
-        //        jbalance.setText(String.valueOf(bal));
-        //        String na=  jbname.getText();
-        //        String pric = jprice.getText();
-        //        String quan= jtquantity.getText();
-        //
-        //        Date da = new Date();
-        //        String datet =da.toString();
-        ////        jreciept.setText(jreciept.getText() + "\n====================================\n\n");
-        ////        jreciept.setText(jreciept.getText() + "              \n  " + datet + "           \n\n");
-        //        jreciept.setText(jreciept.getText() + "\n______________________________________\n\n");
-        //        jreciept.setText(jreciept.getText() + "Flower Name  --------------- : " + na + "\n\n");
-        //        jreciept.setText(jreciept.getText() + "Price        --------------- : " + pric + "\n\n");
-        //        jreciept.setText(jreciept.getText() + "Quatity      --------------- : " + quan + "\n\n");
-        //
-        //
-    }//GEN-LAST:event_jaddActionPerformed
-
-    private void jtcostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtcostMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtcostMouseClicked
-
-    private void jcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcodeKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            try{
-                String bcode = jcode.getText();
-                pst = (PreparedStatement) con.prepareStatement("select * from products where barcode = ?");
-                pst.setString(1, bcode);
-                rs = pst.executeQuery();
-
-                if(rs.next() == false)
-                {
-                    JOptionPane.showMessageDialog(this, "Book Code not Found");
-                }
-                else
-                {
-                    String bname = rs.getString("product_name");
-                    jbname.setText(bname.trim());
-
-                    String price = rs.getString("sellingprice");
-                    jprice.setText(price.trim());
-
-                    quantity.requestFocus();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }//GEN-LAST:event_jcodeKeyPressed
-
-    private void jcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcodeActionPerformed
-
-E_ON_CLOSE);
-        this.dispose();
-    }                                     
+    }//GEN-LAST:event_date3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1265,12 +1418,16 @@ E_ON_CLOSE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField date;
+    private javax.swing.JTextField date1;
+    private javax.swing.JTextField date3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtondelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1278,6 +1435,10 @@ E_ON_CLOSE);
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1289,13 +1450,16 @@ E_ON_CLOSE);
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel68;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public javax.swing.JTable jTable2;
     private javax.swing.JTable jTable7;
     private javax.swing.JButton jadd;
     private javax.swing.JTextField jbalance;
@@ -1310,6 +1474,9 @@ E_ON_CLOSE);
     private javax.swing.JTextField jtquantity;
     private javax.swing.JLabel jusername;
     private javax.swing.JSpinner quantity;
+    private javax.swing.JTextField time;
+    private javax.swing.JTextField time1;
+    private javax.swing.JTextField time3;
     // End of variables declaration//GEN-END:variables
 
 //    private void SelectedCat() {

@@ -127,23 +127,26 @@ public class adminpage extends javax.swing.JFrame {
        public void displayall(){
         try {
             Statement st = con.createStatement();
-            String query1 = "select * from `registered_users`";
+            String query1 = "select * from `registered_user`";
             ResultSet rs1 = st.executeQuery(query1);
 
             while(rs1.next()){
                 //data wil added until finished..
-                String Id1 = rs1.getString("id");
+                String Id1 = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
+                  String phone = rs1.getString("phone_number");
+                    String dat = rs1.getString("date");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String rolr = rs1.getString("role");
 
                 String status1= rs1.getString("status");
-
+                
+                        
                 //string array for store data into jtable..
-                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,rolr,status1};
+                String tbData[] = {Id1,username1,password1,email_id1,phone,dat,gender1,age1,rolr,status1};
                 DefaultTableModel tblModel = (DefaultTableModel)jTable20.getModel();
 
                 //add string array data into jtable..
@@ -197,7 +200,7 @@ public class adminpage extends javax.swing.JFrame {
         }
         public void usersupdate(){
        try{
-           pst = con.prepareStatement("select * from `users`");
+           pst = con.prepareStatement("select * from `registered_user`");
            rs = pst.executeQuery();
            
            ResultSetMetaData rsd = rs.getMetaData();
@@ -212,15 +215,18 @@ public class adminpage extends javax.swing.JFrame {
                Vector v2 = new Vector();
                for(int i=1; i<=c; i++)
                {
-                   v2.add(rs.getString("id"));
+                   v2.add(rs.getString("user_id"));
                    v2.add(rs.getString("username"));
                    v2.add(rs.getString("password"));
-                   v2.add(rs.getString("email_id"));
+                   v2.add(rs.getString("email"));
+                   v2.add(rs.getString("phone_number"));
+                   v2.add(rs.getString("date"));
                    v2.add(rs.getString("gender"));
                    v2.add(rs.getString("age"));
-                   v2.add(rs.getString("role"));
-                   v2.add(rs.getString("status"));
+                    v2.add(rs.getString("role"));
+                      v2.add(rs.getString("role"));
                    
+                          
                }
                de.addRow(v2);
            }
@@ -232,7 +238,7 @@ public class adminpage extends javax.swing.JFrame {
         
         
         public void  deleteusers(){
-        String sql ="select from `users`";
+        String sql ="select from `registered_users`";
         try{
             pst=con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -300,7 +306,6 @@ public class adminpage extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jusernamee = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jcashier = new javax.swing.JLabel();
@@ -311,7 +316,7 @@ public class adminpage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable20 = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel67 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         date = new javax.swing.JTextField();
@@ -365,8 +370,6 @@ public class adminpage extends javax.swing.JFrame {
         jusernamee.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jusernamee.setForeground(new java.awt.Color(255, 0, 0));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -378,13 +381,11 @@ public class adminpage extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(59, 59, 59)
                 .addComponent(jLabel9)
-                .addGap(70, 70, 70)
+                .addGap(68, 68, 68)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,13 +393,10 @@ public class adminpage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
@@ -499,14 +497,14 @@ public class adminpage extends javax.swing.JFrame {
             }
         });
 
-        jTable20.setBackground(new java.awt.Color(255, 255, 204));
+        jTable20.setBackground(new java.awt.Color(204, 255, 153));
         jTable20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable20.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Username", "Password", "Email_id", "Gender", "Age", "Role", "Status"
+                "Id", "Username", "Password", "Email_id", "phone", "date", "Gender", "Age", "Role", "Status"
             }
         ));
         jTable20.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -516,7 +514,7 @@ public class adminpage extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable20);
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel67.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -546,11 +544,11 @@ public class adminpage extends javax.swing.JFrame {
         time.setText("0");
         time.setBorder(null);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel67Layout = new javax.swing.GroupLayout(jPanel67);
+        jPanel67.setLayout(jPanel67Layout);
+        jPanel67Layout.setHorizontalGroup(
+            jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel67Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -561,11 +559,11 @@ public class adminpage extends javax.swing.JFrame {
                 .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanel67Layout.setVerticalGroup(
+            jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel67Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -587,24 +585,27 @@ public class adminpage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                                    .addComponent(jstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(462, 462, 462)
+                        .addComponent(jPanel67, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addGap(462, 462, 462)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -615,10 +616,8 @@ public class adminpage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel67, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
@@ -637,7 +636,7 @@ public class adminpage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,7 +645,7 @@ public class adminpage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1120, 681));
+        setSize(new java.awt.Dimension(1115, 681));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -672,9 +671,9 @@ public class adminpage extends javax.swing.JFrame {
                 String totl2 = rs1.getString("total");
                  String dae = rs1.getString("date");
                 String usr2 = rs1.getString("userid");
-
+                 String sup = rs1.getString("supplier");
                 //string array for store data into jtable..
-                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,dae,usr2};
+                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,dae,usr2,sup};
                 DefaultTableModel tabledata = (DefaultTableModel)jTable9.getModel();
 
                 //add string array data into jtable..
@@ -749,17 +748,22 @@ public class adminpage extends javax.swing.JFrame {
 
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
-                String gender1 = rs1.getString("gender");
-                String age1 = rs1.getString("age");
-                String rol= rs1.getString("role");
+                String email_id1 = rs1.getString("email");
+                String phone = rs1.getString("phone_number");
+                String dts = rs1.getString("date");
+                String gen= rs1.getString("gender");
+                String ag= rs1.getString("age");
+                String ro= rs1.getString("role");
+                String sta= rs1.getString("status");
+                
+                
 //                String sts = rs1.getString("status");
 
                 //string array for store data into jtable..
-                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,rol};
+                String tbData[] = {bid,username1,password1,email_id1,phone,dts,gen,ag,ro,sta};
 
                 DefaultTableModel modelu = (DefaultTableModel)jTable10.getModel();
 
@@ -823,15 +827,17 @@ public class adminpage extends javax.swing.JFrame {
         dispose();
          try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Staff'";
+            String query1 = "select user_id, username, password, email, gender, age, status from `registered_user` where role='Staff'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
+//                  String pho = rs1.getString("phone_number");
+//                  String dt = rs1.getString("date");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");
@@ -862,15 +868,15 @@ public class adminpage extends javax.swing.JFrame {
         
          try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender,age,status from `users` where role='Admin'";
+            String query1 = "select user_id, username, password, email, gender,age,status from `registered_user` where role='Admin'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");
@@ -900,15 +906,15 @@ public class adminpage extends javax.swing.JFrame {
 
        try {
             Statement st = con.createStatement();
-            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Cashier'";
+            String query1 = "select user_id, username, password, email, gender, age, status from `registered_user` where role='Cashier'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("id");
+                String bid = rs1.getString("user_id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
+                String email_id1 = rs1.getString("email");
                 String gender1 = rs1.getString("gender");
                 String age1 = rs1.getString("age");
                 String stat = rs1.getString("status");
@@ -1030,7 +1036,6 @@ public class adminpage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -1038,7 +1043,7 @@ public class adminpage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel67;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTable20;
     private javax.swing.JLabel jadmin;
