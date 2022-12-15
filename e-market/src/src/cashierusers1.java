@@ -28,17 +28,17 @@ import static src.inventorypersonregistrants.jTable3;
  *
  * @author 1styrGroupB
  */
-public class cashierusers extends javax.swing.JFrame {
+public class cashierusers1 extends javax.swing.JFrame {
 
     /**
      * Creates new form cashierusers
      */
-    public cashierusers() {
+    public cashierusers1() {
         initComponents();
         Connect();
     }
     
-     public cashierusers(String username) {
+     public cashierusers1(String username) {
         initComponents();
         Connect();
         jusername.setText(username);
@@ -712,20 +712,21 @@ public class cashierusers extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(cashierusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cashierusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(cashierusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cashierusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(cashierusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cashierusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cashierusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cashierusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cashierusers().setVisible(true);
+                new cashierusers1().setVisible(true);
             }
         });
     }

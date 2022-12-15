@@ -41,7 +41,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import static src.LoginUsers.id;
+import static src.Unapproveusers.jTable10;
 
 import static src.category.jTable6;
 import static src.inventorypersonregistrants.jTable3;
@@ -52,31 +54,30 @@ import static src.soldproducts.jTable5;
  *
  * @author 1styrGroupB
  */
-public class inventorypage extends javax.swing.JFrame {
+public class inventorypage1 extends javax.swing.JFrame {
 
     String filename = null;
     byte[] product_image = null;
 
-    public inventorypage() {
+    public inventorypage1() {
         
          initComponents();
 
         Connect();
+  
    
         dt();
         time();
-        display();
-        availflowers();
+    
      }
     
-     public inventorypage(String usernamee) {
+     public inventorypage1(String usernamee) {
         initComponents();
         jusernamee.setText(usernamee);
           Connect();
            dt();
         time();
-        display();
-        availflowers();
+     
     }
     
      
@@ -93,43 +94,77 @@ public class inventorypage extends javax.swing.JFrame {
             return name;
         }
     }
-    public void availflowers(){
-    try{
-        pst=con.prepareStatement("SELECT * FROM flowerslists");
-        rs = pst.executeQuery();
-        jflowers.removeAllItems();
-        
-        while (rs.next())
-        {
-            jflowers.addItem(new flowers(rs.getInt(1), rs.getString(2)));
-        }
-    }   catch (SQLException ex) {
-            Logger.getLogger(transaction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-}
+//    public void availflowers(){
+//    try{
+//        pst=con.prepareStatement("SELECT * FROM flowerslists");
+//        rs = pst.executeQuery();
+//        jflowers.removeAllItems();
+//        
+//        while (rs.next())
+//        {
+//            jflowers.addItem(new flowers(rs.getInt(1), rs.getString(2)));
+//        }
+//    }   catch (SQLException ex) {
+//            Logger.getLogger(transaction.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    
+//}
  
-    public void display() {
+//    public void display() {
+//        try {
+//            Statement st = con.createStatement();
+//            String query1 = "select * from `approved_products`";
+//            ResultSet rs1 = st.executeQuery(query1);
+////         
+////
+//            while (rs1.next()) {
+//                //data wil added until finished..
+//                String id = rs1.getString("barcode");
+//                String hh = rs1.getString("product_name");
+//                String des1 = rs1.getString("description");
+//                String trr = rs1.getString("quantity");
+//                String buy = rs1.getString("buyingprice");
+//                String sell1 = rs1.getString("sellingprice");
+//                String pro = rs1.getString("productImage");
+//
+//                //string array for store data into jtable..
+//                String tbData[] = {id,hh, des1, trr, buy, sell1, pro};
+//                DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
+//
+//                //add string array data into jtable..
+//                tblModel.addRow(tbData);
+////
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+////
+//    }
+      
+      
+      
+      public void toadd() {
         try {
             Statement st = con.createStatement();
-            String query1 = "select * from `products`";
+            String query1 = "select * from `approved_products`";
             ResultSet rs1 = st.executeQuery(query1);
-//            Statement = con.prepareStatement(query1);
-//            Statement.executeUpdate("Drop Table if Exists Schedule");
-//            pStatement.executeUpdate(query);
+//         
 //
             while (rs1.next()) {
                 //data wil added until finished..
-                String id = rs1.getString("barcode");
+                String id = rs1.getString("id");
                 String hh = rs1.getString("product_name");
                 String des1 = rs1.getString("description");
                 String trr = rs1.getString("quantity");
                 String buy = rs1.getString("buyingprice");
                 String sell1 = rs1.getString("sellingprice");
-                String pro = rs1.getString("productImage");
+                 String talm = rs1.getString("totalamount_cost");
+                String pro = rs1.getString("product_image");
+                String sup = rs1.getString("supplier");
 
                 //string array for store data into jtable..
-                String tbData[] = {id,hh, des1, trr, buy, sell1, pro};
+                String tbData[] = {id,hh, des1, trr, buy, sell1,talm, pro,sup};
                 DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
 
                 //add string array data into jtable..
@@ -157,6 +192,7 @@ public class inventorypage extends javax.swing.JFrame {
            DefaultTableModel de = (DefaultTableModel)jTable4.getModel();
            de.setRowCount(0);
            
+          
            while(rs.next())
            {
                Vector v2 = new Vector();
@@ -168,15 +204,18 @@ public class inventorypage extends javax.swing.JFrame {
                    v2.add(rs.getString("quantity"));
                    v2.add(rs.getString("buyingprice"));
                    v2.add(rs.getString("sellingprice"));
+                   v2.add(rs.getString("totalamount_cost"));
                    v2.add(rs.getString("productImage"));
-
+                   v2.add(rs.getString("supplier"));
+                   
+                   
                    
                }
                de.addRow(v2);
                
            }
        } catch (SQLException ex) {
-            Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(inventorypage1.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
 
@@ -205,7 +244,7 @@ public class inventorypage extends javax.swing.JFrame {
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bebieinventorysystem", "root", "");
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/marketsystem", "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -275,6 +314,16 @@ public class inventorypage extends javax.swing.JFrame {
         });
         t.start();
     }
+    
+    
+//    public void choice(){
+//        
+//           jupdate.setEnabled(false);
+//           jdelete.setEnabled(false);
+//             
+//           jdisplay.setEnabled(false);
+//        }
+//       
 
     public void product() {
 //
@@ -284,31 +333,27 @@ public class inventorypage extends javax.swing.JFrame {
         String date = dt.format(now);
        
         String timee = time.getText();
-        String bname = jflowers.getSelectedItem().toString();
+        String bname = jbname.getText();
         String desc = jdescription.getText();
         String buyingprice = jbuyprice.getText();
         String sellingprice = jsellprice.getText();
+         String tamount = jtotalamount.getText();
+        String supp = jsupplier.getText();
         String img1 = jlinkimage.getText();
 //   
         try {
   
-            String query6 = "insert into `products`(product_name,description,quantity,buyingprice,sellingprice,date_addproduct,time_addproduct,productImage)values(?,?,?,?,?,?,?,?);";
-            pst = con.prepareStatement(query6, Statement.RETURN_GENERATED_KEYS);
-            pst9 = con.prepareStatement(query6); 
-            
+String query6 = "insert into `products`(product_name,description,quantity,buyingprice,sellingprice,totalamount_cost,productImage,supplier)values(?,?,?,?,?,?,?,?);";
+            pst9 = con.prepareStatement(query6, Statement.RETURN_GENERATED_KEYS);
+            pst9 = con.prepareStatement(query6);   
             pst9.setString(1, bname);
             pst9.setString(2, desc);
-//           
-//         pst.setFloat(3, Float.parseFloat(jquantity.getText()));
-//         pst.setDouble(3, Double.parseDouble(jquantity.getText()));
-//         pst.setInt(3, qty);
             pst9.setInt(3, Integer.parseInt(jquantity.getText()));
             pst9.setString(4, buyingprice);
             pst9.setString(5, sellingprice);
-            pst9.setString(6, date);
-            pst9.setString(7, timee);
-            pst9.setString(8, img1);
-
+             pst9.setString(6, tamount);
+            pst9.setString(7, img1);
+            pst9.setString(8, supp);
             pst9.executeUpdate();
 //            rs = pst.getGeneratedKeys();
 
@@ -319,6 +364,47 @@ public class inventorypage extends javax.swing.JFrame {
 //      
         }
     }
+     public void productdispaly() {
+//
+        Calendar cal = new GregorianCalendar();
+        DateTimeFormatter dt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dt.format(now);
+       
+        String timee = time.getText();
+        String bname = jbname.getText();
+        String desc = jdescription.getText();
+//        String pid = jid.getText();
+  String tamount = jtotalamount.getText();
+        String sellingprice = jsellprice.getText();
+        String supp = jsupplier.getText();
+        String img1 = jlinkimage.getText();
+//   
+        try {
+  
+String query6 = "insert into `product_display`(barcode, product_name,description,quantity,sellingprice,totalamount_cost,productImage,supplier)values(?,?,?,?,?,?,?,?);";
+            pst = con.prepareStatement(query6, Statement.RETURN_GENERATED_KEYS);
+            pst9 = con.prepareStatement(query6);  
+            pst9.setInt(1, Integer.parseInt(jid.getText()));
+            pst9.setString(2, bname);
+            pst9.setString(3, desc);
+            pst9.setInt(4, Integer.parseInt(jquantity.getText()));
+            pst9.setString(5, sellingprice);
+             pst9.setString(6, tamount);
+            pst9.setString(7, img1);
+            pst9.setString(8, supp);
+            pst9.executeUpdate();
+//            rs = pst.getGeneratedKeys();
+
+            JOptionPane.showMessageDialog(this, "Product displayed");
+
+        } catch (SQLException e) {
+            Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, e);
+//      
+        }
+    }
+    
+    
 
     //create a fuction to display image into jtable
     public void displayImage(String imgPath, JLabel label) {
@@ -335,30 +421,79 @@ public class inventorypage extends javax.swing.JFrame {
         LocalDateTime now = LocalDateTime.now();
         String date = dt.format(now);
         String timee = time.getText();
-        String prod =  jflowers.getSelectedItem().toString();
+        String prod =  jbname.getText();
         String username = jusernamee.getText();
         String types = "Added Products";
+         String supp = jsupplier.getText();
+//         String qty = jquantity.getText();
+//           double d = Double.parseDouble(qty);
 
         int damm = 0;
 
    String id = jTable4.getModel().getValueAt(jTable4.getModel().getRowCount() - 1, 0).toString();
         try {
 
-            String query = "insert into stransaction(InventoryID,quantity,type_transaction,UserID,date,time)values(?,?,?,?,?,?)";
+             String query = "insert into transactions(InventoryID,quantity,type_transaction,UserID,date,time,username,role)values(?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
             pst.setInt(1, Integer.parseInt(id));//inventory id
+//            pst.setInt(2, Integer.parseInt(jquantity.getText()));
             pst.setDouble(2, Double.parseDouble(jquantity.getText()));
+//            pst.setDouble(2, d);
             pst.setString(3, types);
 //          pst.setString(4, new LoginUsers().id);//username id...
-            pst.setInt(4, new LoginUsers().ID());//username id...
+            pst.setInt(4, new LoginUsers().ID());
             pst.setString(5, date);
             pst.setString(6, timee);
+            pst.setString(7, username);
+             pst.setString(8, supp);
             pst.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, e);
      
         }
+    }
+    
+    
+    
+    public void getproduct(){
+        
+           DefaultTableModel df = (DefaultTableModel)jTable4.getModel();
+             df.setRowCount(0);
+
+            
+            try {
+            Statement st7 = con.createStatement();
+            String query1 = "select * from `products`";
+            ResultSet rs1 = st7.executeQuery(query1);
+
+            while (rs1.next()) {
+                //data wil added until finished..
+              String id = rs1.getString("barcode");
+                String hh = rs1.getString("product_name");
+                String des1 = rs1.getString("description");
+                String trr = rs1.getString("quantity");
+                String buy = rs1.getString("buyingprice");
+                String sell1 = rs1.getString("sellingprice");
+                String tcost = rs1.getString("totalamount_cost");
+                String pro = rs1.getString("productImage");
+                 String supppl = rs1.getString("supplier");
+
+                //string array for store data into jtable..
+                String tbData[] = {id, hh, des1, trr, buy, sell1,tcost, pro,supppl};
+                DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
+
+                //add string array data into jtable..
+                tblModel.addRow(tbData);
+
+            
+            }
+             
+         
+         }catch (SQLException ex) {
+            Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
     
     //insert delete type of transaction..
@@ -369,10 +504,10 @@ public class inventorypage extends javax.swing.JFrame {
         LocalDateTime now = LocalDateTime.now();
         String date = dt.format(now);
         String timee = time.getText();
-        String prod =  jflowers.getSelectedItem().toString();
+        String prod =  jbname.getText();
         String username = jusernamee.getText();
         String types = "Deleted Products";
-
+    String supp = jsupplier.getText();
 //        int damm = 0;
 //        int row = jTable4.getSelectedRow();
 //        String prdct = jTable4.getValueAt(row, 0).toString();
@@ -381,7 +516,7 @@ public class inventorypage extends javax.swing.JFrame {
    String id = jTable4.getModel().getValueAt(jTable4.getModel().getRowCount() - 1, 0).toString();
         try {
 
-            String query = "insert into stransaction(InventoryID,quantity,type_transaction,UserID,date,time)values(?,?,?,?,?,?)";
+           String query = "insert into transactions(InventoryID,quantity,type_transaction,UserID,date,time,username,role)values(?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
             pst.setInt(1, Integer.parseInt(id));//inventory id
             pst.setDouble(2, Double.parseDouble(jquantity.getText()));
@@ -390,6 +525,8 @@ public class inventorypage extends javax.swing.JFrame {
             pst.setInt(4, new LoginUsers().ID());
             pst.setString(5, date);
             pst.setString(6, timee);
+            pst.setString(7, username);
+             pst.setString(8, supp);
             pst.executeUpdate();
 
         } catch (Exception e) {
@@ -405,8 +542,10 @@ public class inventorypage extends javax.swing.JFrame {
         LocalDateTime now = LocalDateTime.now();
         String date = dt.format(now);
         String timee = time.getText();
-        String prod =  jflowers.getSelectedItem().toString();
+        String prod =  jbname.getText();
         String username = jusernamee.getText();
+          String supp = jsupplier.getText();
+//            String tots = jtotalamount.getText();
         String types = "Updated Products";
 
 //        int damm = 0;
@@ -417,7 +556,7 @@ public class inventorypage extends javax.swing.JFrame {
    String id = jTable4.getModel().getValueAt(jTable4.getModel().getRowCount() - 1, 0).toString();
         try {
 
-            String query = "insert into stransaction(InventoryID,quantity,type_transaction,UserID,date,time)values(?,?,?,?,?,?)";
+            String query = "insert into transactions(InventoryID,quantity,type_transaction,UserID,date,time,username,role)values(?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
             pst.setInt(1, Integer.parseInt(id));//inventory id
             pst.setDouble(2, Double.parseDouble(jquantity.getText()));
@@ -426,6 +565,48 @@ public class inventorypage extends javax.swing.JFrame {
             pst.setInt(4, new LoginUsers().ID());
             pst.setString(5, date);
             pst.setString(6, timee);
+            pst.setString(7, username);
+             pst.setString(8, supp);
+            pst.executeUpdate();
+
+        } catch (Exception e) {
+            Logger.getLogger(cashierpage.class.getName()).log(Level.SEVERE, null, e);
+     
+        }
+    }
+     
+      public void invetorytransacdisplay() {
+
+        Calendar cal = new GregorianCalendar();
+        DateTimeFormatter dt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dt.format(now);
+        String timee = time.getText();
+        String prod =  jbname.getText();
+        String username = jusernamee.getText();
+          String supp = jsupplier.getText();
+//            String tots = jtotalamount.getText();
+        String types = "display Products";
+
+//        int damm = 0;
+//        int row = jTable4.getSelectedRow();
+//        String prdct = jTable4.getValueAt(row, 0).toString();
+    
+
+   String id = jTable4.getModel().getValueAt(jTable4.getModel().getRowCount() - 1, 0).toString();
+        try {
+
+            String query = "insert into transactions(InventoryID,quantity,type_transaction,UserID,date,time,username,role)values(?,?,?,?,?,?,?,?)";
+            pst = con.prepareStatement(query);
+            pst.setInt(1, Integer.parseInt(id));//inventory id
+            pst.setDouble(2, Double.parseDouble(jquantity.getText()));
+            pst.setString(3, types);
+//          pst.setString(4, new LoginUsers().id);//username id...
+            pst.setInt(4, new LoginUsers().ID());
+            pst.setString(5, date);
+            pst.setString(6, timee);
+            pst.setString(7, username);
+             pst.setString(8, supp);
             pst.executeUpdate();
 
         } catch (Exception e) {
@@ -434,7 +615,76 @@ public class inventorypage extends javax.swing.JFrame {
         }
     }
 
+  
+
+     
+       public void updateproduct(){
+        String sql ="select from `approved_products`";
+        try{
+            pst=con.prepareStatement(sql);
+            rs = pst.executeQuery();
+//            jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+//           JOptionPane.showMessageDialog(null, e);
+        }finally{
+        try{
+            rs.close();
+            pst.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+       }
+       
+       
+       
+        public void getproductdisplay(){
+        
+           DefaultTableModel df = (DefaultTableModel)jTable4.getModel();
+             df.setRowCount(0);
+
+            
+            try {
+            Statement st7 = con.createStatement();
+            String query1 = "select * from `products`";
+            ResultSet rs1 = st7.executeQuery(query1);
+
+            while (rs1.next()) {
+                //data wil added until finished..
+              String id = rs1.getString("barcode");
+                String hh = rs1.getString("product_name");
+                String des1 = rs1.getString("description");
+                String trr = rs1.getString("quantity");
+                String buy = rs1.getString("buyingprice");
+                String sell1 = rs1.getString("sellingprice");
+                String tcost = rs1.getString("totalamount_cost");
+                String pro = rs1.getString("productImage");
+                 String supppl = rs1.getString("supplier");
+
+                //string array for store data into jtable..
+                String tbData[] = {id, hh, des1, trr, buy, sell1,tcost, pro,supppl};
+                DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
+
+                //add string array data into jtable..
+                tblModel.addRow(tbData);
+
+            
+            }
+             
+         
+         }catch (SQLException ex) {
+            Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+     }
+       
+       
+       
+       
    
+     
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -443,14 +693,11 @@ public class inventorypage extends javax.swing.JFrame {
         jsoldproduct = new javax.swing.JPanel();
         jsold = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jusernamee = new javax.swing.JLabel();
         jadd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jquantity = new javax.swing.JTextField();
@@ -465,14 +712,23 @@ public class inventorypage extends javax.swing.JFrame {
         jdescription = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jflowers = new javax.swing.JComboBox();
+        jupdate = new javax.swing.JButton();
+        jdelete = new javax.swing.JButton();
         jPanel67 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         date = new javax.swing.JTextField();
         time = new javax.swing.JTextField();
+        jsupplier = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jtotalamount = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jbname = new javax.swing.JTextField();
+        jchoose = new javax.swing.JComboBox<>();
+        jshow = new javax.swing.JButton();
+        jdisplay = new javax.swing.JButton();
+        jid = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -499,22 +755,12 @@ public class inventorypage extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/flowercon.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ImageIcon_1.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
-
-        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
 
         jusernamee.setBackground(new java.awt.Color(204, 204, 204));
         jusernamee.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -528,43 +774,25 @@ public class inventorypage extends javax.swing.JFrame {
             .addGroup(jsoldproductLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jsoldproductLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jsold)
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(jsoldproductLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(107, 107, 107)
+                .addComponent(jsold)
+                .addGap(76, 76, 76)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 576, Short.MAX_VALUE)
+                .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jsoldproductLayout.setVerticalGroup(
             jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jsoldproductLayout.createSequentialGroup()
                 .addGroup(jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jsoldproductLayout.createSequentialGroup()
-                        .addGroup(jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jsoldproductLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jsold)))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jsoldproductLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18))
-                    .addGroup(jsoldproductLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jsoldproductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(jsold)
+                            .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -587,7 +815,7 @@ public class inventorypage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Flower Name", "Description", "Quatity", "Buying Price", "Sellintg Price", "Image"
+                "ID", "Product Name", "Description", "Quatity", "Buying Price", "Sellintg Price", "Total cost", "Image", "Supplier"
             }
         ));
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -597,29 +825,23 @@ public class inventorypage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable4);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 580, 227));
-
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 102));
-        jLabel4.setText("Product Sales");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 670, 227));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 102));
-        jLabel5.setText("Quantity");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+        jLabel5.setText("Supplier");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 102));
-        jLabel6.setText("Buying Price");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+        jLabel6.setText("Total cost");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, -1, -1));
 
         jquantity.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jquantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 150, 35));
+        jPanel1.add(jquantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 150, 35));
 
         jbuyprice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jbuyprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 150, 35));
+        jPanel1.add(jbuyprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 150, 35));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -644,7 +866,7 @@ public class inventorypage extends javax.swing.JFrame {
                 jimageproductActionPerformed(evt);
             }
         });
-        jPanel1.add(jimageproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, 41));
+        jPanel1.add(jimageproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, 41));
 
         jproductimage.setBackground(new java.awt.Color(255, 255, 204));
         jproductimage.setOpaque(true);
@@ -673,30 +895,27 @@ public class inventorypage extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 102));
         jLabel9.setText("Flower Name");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 102));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jupdate.setBackground(new java.awt.Color(204, 255, 102));
+        jupdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jupdate.setText("Update");
+        jupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jupdateActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 83, 35));
+        jPanel1.add(jupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 83, 35));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 102));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Delete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jdelete.setBackground(new java.awt.Color(204, 255, 102));
+        jdelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jdelete.setText("Delete");
+        jdelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jdeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 480, 81, 35));
-
-        jflowers.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jflowers, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 300, 39));
+        jPanel1.add(jdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 480, 81, 35));
 
         jPanel67.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -755,7 +974,53 @@ public class inventorypage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, -1, -1));
+        jPanel1.add(jPanel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 110, -1, -1));
+
+        jsupplier.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel1.add(jsupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 150, 35));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel11.setText("Quantity");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, 20));
+
+        jtotalamount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtotalamountActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtotalamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 150, 40));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel14.setText("Buying Price");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+        jPanel1.add(jbname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 222, 140, 40));
+
+        jchoose.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jchoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Products to add", "Available products", "Products to display" }));
+        jPanel1.add(jchoose, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 170, 200, 40));
+
+        jshow.setText("Show");
+        jshow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jshowActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jshow, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 170, 70, 40));
+
+        jdisplay.setText("Display");
+        jdisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jdisplayActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jdisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 482, -1, 30));
+        jPanel1.add(jid, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 50, 30));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Id");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 30, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -766,101 +1031,143 @@ public class inventorypage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1243, 624));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaddActionPerformed
 //         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //         String date1 = sdf.format(JDATE.getDate());
-        String date1 = date.getText();
-        String qty = jquantity.getText();
-        String timee = time.getText();
-        String bname = jflowers.getSelectedItem().toString();
-        String desc = jdescription.getText();
-        String buyingprice = jbuyprice.getText();
-        String sellingprice = jsellprice.getText();
-        String img1 = jlinkimage.getText();
-        
-//         if(rs.getString(8).equals("Inactive")){
-//                        JOptionPane.showMessageDialog(null, "Please wait for admin approval");
-//                    }
-        
-         if (bname.trim().equals("") || bname.trim().equals("")
-                || qty.trim().equals("") || qty.trim().equals("")
-                || sellingprice.trim().equals("") || sellingprice.trim().equals("")
-                || img1.trim().equals("") || img1.trim().equals("")
-                || desc.trim().equals("") || desc.trim().equals("")
-                || buyingprice.trim().equals("") || buyingprice.trim().equals("")) {
-             JOptionPane.showMessageDialog(null, "Other fields are empty!");
-            
-        }
-             
-        else {
-             
-               product();
-//              
-             DefaultTableModel df = (DefaultTableModel)jTable4.getModel();
-             df.setRowCount(0);
-             
-//            df = (DefaultTableModel) jTable4.getModel();
-//             df.addRow(new Object[]);
-//             {
+//        String date1 = date.getText();
+//        String qty = jquantity.getText();
+//        String timee = time.getText();
+//        String bname = jbname.getText();
+//        String supp = jsupplier.getText();
+//        String tot = jtotalamount.getText();
+//        String desc = jdescription.getText();
+//        String buyingprice = jbuyprice.getText();
+//        String sellingprice = jsellprice.getText();
+//        String img1 = jlinkimage.getText();
+//        
+//         if (bname.trim().equals("") || bname.trim().equals("")
+//                || qty.trim().equals("") || qty.trim().equals("")
+//                || sellingprice.trim().equals("") || sellingprice.trim().equals("")
+//                || img1.trim().equals("") || img1.trim().equals("")
+//                 || supp.trim().equals("") || supp.trim().equals("")
+//                || desc.trim().equals("") || desc.trim().equals("")
+//                || buyingprice.trim().equals("") || buyingprice.trim().equals("")) {
+//             JOptionPane.showMessageDialog(null, "Other fields are empty!");
+//            
+//        }
+//             
+//        else {
+//             
+//               product();
+//               
+//                int row = jTable4.getSelectedRow();
+//
+//        String cell = jTable4.getModel().getValueAt(row, 0).toString();
+//
+//        String sql = "DELETE FROM `approved_products` where id= " + cell;
+//
+//        try {
+//            pst = con.prepareStatement(sql);
+//            pst.execute();
+//            JOptionPane.showMessageDialog(null, " New product Added!");
+//            updateproduct();
+//
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        } finally {
+//            try {
+//                pst.close();
+//                rs.close();
+//
+//            } catch (Exception e) {
+//            }
+//     
+//     
 //          
-//            jbname.getText(),
-//            jquantity.getText(),
-//            jbuyprice.getText(),
-//            jsellprice.getText(),
-//            jdescription.getText(),
-//            jlinkimage.getText(),
-//        });
-         
-         
-             
+//         
+//     
+//        jbname.setText("");
+//        jbuyprice.setText("");
+//        jquantity.setText("");
+//        jsellprice.setText("");
+//        jlinkimage.setText("");
+//        jdescription.setText("");
+//
+//         }  
+//         }
+
+DefaultTableModel tbmodel = (DefaultTableModel)jTable4.getModel();
+        if(jTable4.getSelectedRowCount() == 1){
+         product();
+          JOptionPane.showMessageDialog(null, "Approved!");
+        
+          
+          //      to remove approved applicants/registrants..  
+//        String role1;
+//        role1 = jrole.getSelectedItem().toString();
+
+        int row = jTable4.getSelectedRow();
+
+        String cell = jTable4.getModel().getValueAt(row, 0).toString();
+
+        String sql = "DELETE FROM `approved_products` where id= " + cell;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, " New product Added!");
+            updateproduct();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
             try {
-            Statement st7 = con.createStatement();
-            String query1 = "select * from `products`";
-            ResultSet rs1 = st7.executeQuery(query1);
+                pst.close();
+                rs.close();
 
-            while (rs1.next()) {
-                //data wil added until finished..
-              String id = rs1.getString("barcode");
-                String hh = rs1.getString("product_name");
-                String des1 = rs1.getString("description");
-                String trr = rs1.getString("quantity");
-                String buy = rs1.getString("buyingprice");
-                String sell1 = rs1.getString("sellingprice");
-                String pro = rs1.getString("productImage");
-
-                //string array for store data into jtable..
-                String tbData[] = {id, hh, des1, trr, buy, sell1, pro};
-                DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
-
-                //add string array data into jtable..
-                tblModel.addRow(tbData);
-
-            
+            } catch (Exception e) {
             }
-             invetorytransac();
-         
-         }catch (SQLException ex) {
-            Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-         
      
-        jflowers.setSelectedItem(0);
+        
+                
+         DefaultTableModel model = (DefaultTableModel)jTable4.getModel();
+         //delete row
+         if(jTable4.getSelectedRowCount()==1){
+             //if single row is selected then delete
+              model.removeRow(jTable4.getSelectedRow());
+              jbname.setText("");
         jbuyprice.setText("");
         jquantity.setText("");
         jsellprice.setText("");
         jlinkimage.setText("");
         jdescription.setText("");
+//
+//              jstatus.setSelectedIndex(0);
+         }
+       }
+      
+           
+       }else{
+           if(jTable4.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Table is empty!");
+           }else{
+                    JOptionPane.showMessageDialog(null, "Please select a single row!");
+           }
+       }
+         
 
-         }   
+
+         
+        
 
     }//GEN-LAST:event_jaddActionPerformed
 
@@ -877,16 +1184,21 @@ public class inventorypage extends javax.swing.JFrame {
 
             while (rs1.next()) {
                 //data wil added until finished..
-                String bid = rs1.getString("Id");
-                String salesid = rs1.getString("sales_id");
-                String bookn = rs1.getString("product_name");
-                String buying = rs1.getString("buyingprice");
-                String price = rs1.getString("price");
-                String qty = rs1.getString("quantity");
-                String totl = rs1.getString("total");
-
+                 String bid2 = rs1.getString("product_id");
+                String salesid2 = rs1.getString("sales_id");
+                String bookn2 = rs1.getString("product_name");
+                 String buying = rs1.getString("buyingprice");
+                String price2 = rs1.getString("price");
+                String qty2 = rs1.getString("quantity");
+                String totl2 = rs1.getString("total");
+                 String date2 = rs1.getString("date");
+                  String userID = rs1.getString("userid");
+                  String supp = rs1.getString("supplier");
+                   String use = rs1.getString("username");
+                  
+        
                 //string array for store data into jtable..
-                String tbData[] = {bid, salesid, bookn,buying, price, qty, totl};
+                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,date2,userID,supp,use};
                 DefaultTableModel tblModel = (DefaultTableModel) jTable5.getModel();
 
                 //add string array data into jtable..
@@ -913,15 +1225,20 @@ public class inventorypage extends javax.swing.JFrame {
 
         String value = model2.getValueAt(Myindex, Mycolumn).toString();
         int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
-        jflowers.setSelectedItem(model2.getValueAt(Myindex, 1).toString());
+//        jbname.setSelectedItem(model2.getValueAt(Myindex, 1).toString());
+        jid.setText(model2.getValueAt(Myindex, 0).toString());
         jdescription.setText(model2.getValueAt(Myindex, 2).toString());
         jquantity.setText(model2.getValueAt(Myindex, 3).toString());
+         jbname.setText(model2.getValueAt(Myindex, 1).toString());
+
         jbuyprice.setText(model2.getValueAt(Myindex, 4).toString());
         jsellprice.setText(model2.getValueAt(Myindex, 5).toString());
 
-        jlinkimage.setText(model2.getValueAt(Myindex, 6).toString());
-
-        jadd.setEnabled(false);
+        jlinkimage.setText(model2.getValueAt(Myindex, 7).toString());
+        
+         jsupplier.setText(model2.getValueAt(Myindex, 8).toString());
+   jtotalamount.setText(model2.getValueAt(Myindex, 6).toString());
+    
         
         //select image from jtable to jlabel
 //        JLabel imageic = (JLabel) jTable4.getValueAt(Myindex, 6);
@@ -933,11 +1250,16 @@ public class inventorypage extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jflowers.setSelectedItem(0);
+       jbname.setText("");
         jbuyprice.setText("");
         jquantity.setText("");
         jsellprice.setText("");
-        jlinkimage.setText("");
+        jsupplier.setText("");
+         jtotalamount.setText("");
+          jdescription.setText("");
+           jlinkimage.setText("");
+          jproductimage.setText(null);
+         jbname.setText("");
       jadd.setEnabled(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -973,18 +1295,7 @@ public class inventorypage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jimageproductActionPerformed
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        // TODO add your handling code here:
-        
-        LoginUsers cashregis = new LoginUsers();
-        cashregis.setVisible(true);
-        cashregis.pack();
-        cashregis.setLocationRelativeTo(null);
-        cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jupdateActionPerformed
         // TODO add your handling code here:
          if(jTable4.getSelectedRowCount() == 1){
         DefaultTableModel model2 = (DefaultTableModel) jTable4.getModel();
@@ -993,48 +1304,55 @@ public class inventorypage extends javax.swing.JFrame {
 
         String value = model2.getValueAt(Myindex, Mycolumn).toString();
         int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
-        String bname =  jflowers.getSelectedItem().toString();
+        String bname =  jbname.getText();
         String qty = jquantity.getText();
         String bprice = jbuyprice.getText();
         String sprice = jsellprice.getText();
         String des = jdescription.getText();
         String imgl = jlinkimage.getText();
+      String ts = jtotalamount.getText();
+         String supp = jsupplier.getText();
   
         invetorytransacupdate();
+        
+       
         try{
-            pst = con.prepareStatement("UPDATE `products` set product_name= ?, quantity= ?, buyingprice= ?,sellingprice= ?,description= ?,productImage= ? where barcode= ?");
+            pst = con.prepareStatement("UPDATE `products` set product_name= ?,description=?, quantity= ?, buyingprice= ?,sellingprice= ?,totalamount_cost=?, productImage= ?, supplier=?  where barcode= ?");
             //
             pst.setString(1, bname);
-            pst.setString(2, qty);
-            pst.setString(3,bprice);
-            pst.setString(4,sprice);
-            pst.setString(5,des);
-            pst.setString(6,imgl);
-            pst.setInt(7, id);
+            pst.setString(2, des);
+            pst.setString(3,qty);
+            pst.setString(4,bprice);
+            pst.setString(5,sprice);
+              pst.setString(6,ts); 
+              pst.setString(7,imgl); 
+              
+            pst.setString(8,supp);
+       
+            pst.setInt(9, id);
 
             int k= pst.executeUpdate();
 
             if(k==1)
             {
                 JOptionPane.showMessageDialog(this, "Successfully Updated");
-                jflowers.setSelectedItem(0);
+                 jbname.setText("");
                 jquantity.setText("");
                 jbuyprice.setText("");
                 jsellprice.setText("");
                  jdescription.setText("");
                  jlinkimage.setText("");
-                jflowers.requestFocus();
+                jbname.requestFocus();
 
                 salesupdate();
 
-            
 
             }
             
            
                
         } catch (SQLException ex) {
-            Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(inventorypage1.class.getName()).log(Level.SEVERE, null, ex);
         }
          }
         else{
@@ -1045,10 +1363,11 @@ public class inventorypage extends javax.swing.JFrame {
            }
     }
 
-        jadd.setEnabled(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+     
+        
+    }//GEN-LAST:event_jupdateActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdeleteActionPerformed
         // TODO add your handling code here:
         if(jTable4.getSelectedRowCount() == 1){
         invetorytransacdelete();
@@ -1062,8 +1381,6 @@ public class inventorypage extends javax.swing.JFrame {
             pst.execute();
             JOptionPane.showMessageDialog(null, "Successfully Deleted!");
             updateproductsales();
-            
-          
 
         }catch (Exception e) {
 
@@ -1082,12 +1399,14 @@ public class inventorypage extends javax.swing.JFrame {
             if(jTable4.getSelectedRowCount()==1){
                 //if single row is selected then delete
                 model.removeRow(jTable4.getSelectedRow());
-                jflowers.setSelectedItem(0);
+              jbname.setText("");
                 jquantity.setText("");
                 jbuyprice.setText("");
                 jsellprice.setText("");
                 jdescription.setText("");
-                jlinkimage.setText("");                
+                jlinkimage.setText("");  
+                jsupplier.setText("");  
+                   jtotalamount.setText("");  
                           
         }
            
@@ -1103,8 +1422,8 @@ public class inventorypage extends javax.swing.JFrame {
            
         }
            
-        jadd.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+      
+    }//GEN-LAST:event_jdeleteActionPerformed
 
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
@@ -1119,6 +1438,48 @@ public class inventorypage extends javax.swing.JFrame {
         cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jtotalamountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtotalamountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtotalamountActionPerformed
+
+    private void jshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jshowActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel df = (DefaultTableModel)jTable4.getModel();
+      df.setRowCount(0);
+        
+         if (jchoose.getSelectedIndex() == 0) {
+          toadd();
+           jupdate.setEnabled(false);
+           jdelete.setEnabled(false);
+           jadd.setEnabled(true);
+             jdisplay.setEnabled(false);
+          
+        }else if(jchoose.getSelectedIndex() == 1) {
+           getproduct();
+            jadd.setEnabled(false);
+              jupdate.setEnabled(true);
+           jdelete.setEnabled(true);
+             jdisplay.setEnabled(false);
+        }
+         else if(jchoose.getSelectedIndex() == 2) {
+           getproductdisplay();
+            jadd.setEnabled(false);
+            jupdate.setEnabled(true);
+            jdisplay.setEnabled(true);
+           jdelete.setEnabled(true);
+        }
+        DefaultTableModel model = (DefaultTableModel)jTable4.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable4.setRowSorter(tr);
+    }//GEN-LAST:event_jshowActionPerformed
+
+    private void jdisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdisplayActionPerformed
+        // TODO add your handling code here:
+        productdispaly();
+        invetorytransacdisplay();
+    
+    }//GEN-LAST:event_jdisplayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1137,40 +1498,39 @@ public class inventorypage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(inventorypage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventorypage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(inventorypage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventorypage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(inventorypage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventorypage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(inventorypage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventorypage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new inventorypage().setVisible(true);
+                new inventorypage1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField date;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1178,16 +1538,24 @@ public class inventorypage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable4;
     private javax.swing.JButton jadd;
+    private javax.swing.JTextField jbname;
     private javax.swing.JTextField jbuyprice;
+    private javax.swing.JComboBox<String> jchoose;
+    private javax.swing.JButton jdelete;
     private javax.swing.JTextField jdescription;
-    private javax.swing.JComboBox jflowers;
+    private javax.swing.JButton jdisplay;
+    private javax.swing.JTextField jid;
     private javax.swing.JButton jimageproduct;
     private javax.swing.JTextField jlinkimage;
     private javax.swing.JLabel jproductimage;
     private javax.swing.JTextField jquantity;
     private javax.swing.JTextField jsellprice;
+    private javax.swing.JButton jshow;
     private javax.swing.JLabel jsold;
     private javax.swing.JPanel jsoldproduct;
+    private javax.swing.JTextField jsupplier;
+    private javax.swing.JTextField jtotalamount;
+    private javax.swing.JButton jupdate;
     public javax.swing.JLabel jusernamee;
     private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables

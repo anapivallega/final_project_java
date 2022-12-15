@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+//this is updated yow
 package src;
 
 import java.awt.event.ActionEvent;
@@ -63,7 +66,7 @@ public class adminpage extends javax.swing.JFrame {
         displayall();
     }
     
-     Connection con;
+    Connection con;
     PreparedStatement pst;
     PreparedStatement pst1;
     ResultSet rs;
@@ -312,7 +315,6 @@ public class adminpage extends javax.swing.JFrame {
         jadmin = new javax.swing.JLabel();
         jcategory = new javax.swing.JLabel();
         jtransaction = new javax.swing.JLabel();
-        jsold = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable20 = new javax.swing.JTable();
@@ -331,7 +333,7 @@ public class adminpage extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel7.setText("Approve  New Users");
+        jLabel7.setText("Approval for users");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
@@ -383,7 +385,7 @@ public class adminpage extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(68, 68, 68)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jusernamee, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -431,7 +433,7 @@ public class adminpage extends javax.swing.JFrame {
 
         jcategory.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jcategory.setForeground(new java.awt.Color(255, 204, 153));
-        jcategory.setText("Available Products");
+        jcategory.setText(" Products");
         jcategory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jcategoryMouseClicked(evt);
@@ -440,19 +442,10 @@ public class adminpage extends javax.swing.JFrame {
 
         jtransaction.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jtransaction.setForeground(new java.awt.Color(255, 204, 153));
-        jtransaction.setText("Sales_Transactions");
+        jtransaction.setText("Transactions");
         jtransaction.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtransactionMouseClicked(evt);
-            }
-        });
-
-        jsold.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jsold.setForeground(new java.awt.Color(255, 204, 153));
-        jsold.setText("Sold Product");
-        jsold.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jsoldMouseClicked(evt);
             }
         });
 
@@ -468,8 +461,7 @@ public class adminpage extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtransaction)
                             .addComponent(jcashier, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jsold))))
+                            .addComponent(jadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -483,9 +475,7 @@ public class adminpage extends javax.swing.JFrame {
                 .addComponent(jcategory)
                 .addGap(29, 29, 29)
                 .addComponent(jtransaction)
-                .addGap(30, 30, 30)
-                .addComponent(jsold)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -588,16 +578,11 @@ public class adminpage extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -605,8 +590,10 @@ public class adminpage extends javax.swing.JFrame {
                         .addComponent(jPanel67, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 976, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -620,9 +607,9 @@ public class adminpage extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
@@ -648,46 +635,6 @@ public class adminpage extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1115, 681));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jsoldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jsoldMouseClicked
-        // TODO add your handling code here:
-        soldadmin admin = new soldadmin(jusernamee.getText());
-        admin.show();
-        dispose();
-  
-        try {
-            Statement st = con.createStatement();
-            String query1 = "select * from `sales_products`";
-            ResultSet rs1 = st.executeQuery(query1);
-
-            while(rs1.next()){
-                //data wil added until finished..
-                String bid2 = rs1.getString("id");
-                String salesid2 = rs1.getString("sales_id");
-                String bookn2 = rs1.getString("product_name");
-                 String buying = rs1.getString("buyingprice");
-                String price2 = rs1.getString("price");
-                String qty2 = rs1.getString("quantity");
-                String totl2 = rs1.getString("total");
-                 String dae = rs1.getString("date");
-                String usr2 = rs1.getString("userid");
-                 String sup = rs1.getString("supplier");
-                //string array for store data into jtable..
-                String tbData[] = {bid2,salesid2,bookn2,buying,price2,qty2,totl2,dae,usr2,sup};
-                DefaultTableModel tabledata = (DefaultTableModel)jTable9.getModel();
-
-                //add string array data into jtable..
-
-                tabledata.addRow(tbData);
-
-            }
-
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jsoldMouseClicked
 
     private void jcategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcategoryMouseClicked
         // TODO add your handling code here:
@@ -1021,6 +968,9 @@ public class adminpage extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(adminpage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1049,7 +999,6 @@ public class adminpage extends javax.swing.JFrame {
     private javax.swing.JLabel jadmin;
     private javax.swing.JLabel jcashier;
     private javax.swing.JLabel jcategory;
-    private javax.swing.JLabel jsold;
     private javax.swing.JLabel jstaff;
     private javax.swing.JLabel jtransaction;
     public javax.swing.JLabel jusernamee;

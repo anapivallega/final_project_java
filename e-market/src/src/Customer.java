@@ -50,6 +50,10 @@ public class Customer extends javax.swing.JFrame {
     PreparedStatement pst1;
     ResultSet rs;
     DefaultTableModel df;
+
+    Customer(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public void Connect()
   {

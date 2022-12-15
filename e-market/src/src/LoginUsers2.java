@@ -26,16 +26,16 @@ import static src.adminpage.jTable20;
  *
  * @author 1styrGroupB
  */
-public class LoginUsers extends javax.swing.JFrame {
+public class LoginUsers2 extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginUsers
+     * Creates new form LoginUsers2
      */
     
     static int id;
     My_Connection myc;
 
-    public LoginUsers() {
+    public LoginUsers2() {
         initComponents();
         myc = new My_Connection();
         dt();
@@ -482,9 +482,9 @@ public class LoginUsers extends javax.swing.JFrame {
                         else if (rs.getString(9).equals("Supplier")) {
                             JOptionPane.showMessageDialog(null, "Hello supplier " + uname + "!" + " Welcome to" + "FaToTab" + "!!");
 //                            
-//                             inventory = new inventorypage(jname.getText());
-//                             inventory.show();
-//                            dispose();                 
+//                             Suppliers  sup= new Suppliers(jname.getText());
+//                             sup.show();
+//                              dispose();                 
                      
                              id=rs.getInt("user_id");
                             
@@ -493,9 +493,9 @@ public class LoginUsers extends javax.swing.JFrame {
                         else if (rs.getString(9).equals("Buyer")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "FaToTab" + "You can now purchase our fresh product!!");
 //                            
-//                             inventory = new inventorypage(jname.getText());
-//                             inventory.show();
-//                            dispose();                 
+                             Customer  CUST= new Customer(jname.getText());
+                             CUST.show();
+                            dispose();                 
                      
                              id=rs.getInt("user_id");
                             
@@ -566,7 +566,7 @@ public class LoginUsers extends javax.swing.JFrame {
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
-        LoginUsers cashregis = new  LoginUsers();
+        LoginUsers2 cashregis = new  LoginUsers2();
         cashregis.setVisible(true);
         cashregis.pack();
         cashregis.setLocationRelativeTo(null);
@@ -593,20 +593,23 @@ public class LoginUsers extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUsers2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUsers2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUsers2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUsers2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginUsers().setVisible(true);
+                new LoginUsers2().setVisible(true);
             }
         });
     }

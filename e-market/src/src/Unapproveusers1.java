@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import static src.Customer.jTable11;
+//import static src.Customer.jTable11;
 
 import static src.category.jTable6;
 
@@ -31,12 +31,12 @@ import static src.category.jTable6;
  *
  * @author 1styrGroupB
  */
-public class Unapproveusers extends javax.swing.JFrame {
+public class Unapproveusers1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Unapproveusers
      */
-    public Unapproveusers() {
+    public Unapproveusers1() {
         initComponents();
         Connect();
         disabled();
@@ -45,7 +45,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 //        toapproveuser();
     }
     
-     public Unapproveusers(String usernameu) {
+     public Unapproveusers1(String usernameu) {
         initComponents();
         juserun.setText(usernameu);
           Connect(); 
@@ -91,11 +91,11 @@ public class Unapproveusers extends javax.swing.JFrame {
        model10.addRow(dataRow);
      }
      
-      public static void AddRowToJapprovedTable(Object[] dataRow)   
-     {
-       DefaultTableModel model11 = (DefaultTableModel)jTable11.getModel(); 
-       model11.addRow(dataRow);
-     }
+//      public static void AddRowToJapprovedTable(Object[] dataRow)   
+//     {
+//       DefaultTableModel model11 = (DefaultTableModel)jTable11.getModel(); 
+//       model11.addRow(dataRow);
+//     }
       
        public void dt() {
 
@@ -886,20 +886,21 @@ public class Unapproveusers extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Unapproveusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Unapproveusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Unapproveusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Unapproveusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Unapproveusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Unapproveusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Unapproveusers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Unapproveusers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Unapproveusers().setVisible(true);
+                new Unapproveusers1().setVisible(true);
             }
         });
     }
